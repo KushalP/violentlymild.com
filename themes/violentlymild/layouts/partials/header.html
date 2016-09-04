@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="Kushal Pisavadia" />
+
+  <base href="{{ .Site.BaseURL }}">
+
+  <title>Violently Mild &raquo; {{ .Title }}</title>
+
+  <link rel="dns-prefetch" href="//violentlymild.com" />
+
+  <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/main.css" type="text/css" media="screen" />
+  <link href="http://fonts.googleapis.com/css?family=Sintony:400,700" rel="stylesheet" type="text/css">
+
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ if .RSSlink }}<link href="{{ .RSSlink }}" rel="alternate" type="application/rss+xml" title="{{ .Title }}" />{{ end }}
+
+  <link rel="home" href="/" title="Home page" />
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <ul class="navigation">
+      <li><a href="{{ .Site.BaseURL }}">Home</a></li>
+      <li><a href="{{ .Site.BaseURL }}archive/">Archive</a></li>
+      <li><a href="{{ .Site.BaseURL }}talks/">Talks</a></li>
+    </ul>
