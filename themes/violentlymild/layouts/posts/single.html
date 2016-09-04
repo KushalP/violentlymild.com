@@ -2,7 +2,7 @@
 
     <article id="post">
       <h1>{{ .Title }}</h1>
-      <h2 class="date">{{ dateFormat "August 25 2000" .PublishDate }}</h2>
+      <h2 class="date">{{ .Date | dateFormat "January 2 2006" }}</h2>
 
       {{ .Content }}
     </article>
