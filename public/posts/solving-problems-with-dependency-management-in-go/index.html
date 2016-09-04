@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="Kushal Pisavadia" />
+
+  <base href="http://violentlymild.com/">
+
+  <title>Violently Mild &raquo; Solving problems with dependency management in Go</title>
+
+  <link rel="dns-prefetch" href="//violentlymild.com" />
+
+  <link rel="stylesheet" href="http://violentlymild.com//css/main.css" type="text/css" media="screen" />
+  <link href="http://fonts.googleapis.com/css?family=Sintony:400,700" rel="stylesheet" type="text/css">
+
+  <link rel="canonical" href="http://violentlymild.com/posts/solving-problems-with-dependency-management-in-go/">
+  
+
+  <link rel="home" href="/" title="Home page" />
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <ul class="navigation">
+      <li><a href="http://violentlymild.com/">Home</a></li>
+      <li><a href="http://violentlymild.com/posts/">Posts</a></li>
+      <li><a href="http://violentlymild.com/talks/">Talks</a></li>
+    </ul>
+
+
+    <article id="post">
+      <h1>Solving problems with dependency management in Go</h1>
+      <h2 class="date">February 24 2015</h2>
+
+      
+
+<p><em>This is a blog post I wrote for the GDS Technology blog. You can read
+the original
+<a href="https://gdstechnology.blog.gov.uk/2015/02/24/solving-problems-with-dependency-management-in-go/">here</a>.</em></p>
+
+<p>In a
+<a href="https://gdstechnology.blog.gov.uk/2014/11/14/using-go-in-government/">previous blog post</a>
+we talked about how we use the programming language Go. But it only
+briefly touched on the issue of
+<a href="https://www.gov.uk/service-manual/making-software/dependency-management">dependency management</a>,
+where Go is reliant on backwards compatible or vendored software. This
+post is about what we’ve done about that.</p>
+
+<h3 id="libraries">Libraries</h3>
+
+<p>As developers we regularly use other libraries or packages to help us
+solve a problem rather than writing everything ourselves. Most
+programming languages offer a dependency system for distributing
+libraries. At GDS we use languages like Ruby, Python and Java and each
+language has its preferred tool to manage these dependencies: bundler,
+pip and gradle, for example.</p>
+
+<p>Libraries installed through a package system can be installed
+system-wide (known as site packages) or copied somewhere into the
+directory containing the project (known as vendoring). However this
+tripped us up when we started to use Go. This is because Go doesn’t
+currently provide a way of defining specific versions of dependencies
+to use. The language maintainers have
+<a href="http://golang.org/doc/faq#get_version">publicly endorsed vendoring</a>
+of dependencies, but this isn’t always productive when you want an
+easy way to keep various dependencies up to date.</p>
+
+<h3 id="dependencies-in-go">Dependencies in Go</h3>
+
+<p>Dependencies in Go are downloaded using the <code>go get</code> tool and placed
+into a directory determined by the <code>$GOPATH</code> environment
+variable. Dependencies aren’t explicitly pinned to a version and the
+recommended model of development is to always keep the master branch
+backwards compatible and up-to-date, or to vendor dependencies as
+required.</p>
+
+<p>If two developers were to work on a single project at two points in
+time, with some difference in-between. And the dependencies that were
+used had changed during this time. Then the software they’d be working
+on would be different and could cause issues.</p>
+
+<p>This was a problem for us because we wanted to make sure that the
+various services we write in Go can always be compiled using specific
+versions of each library we were using.</p>
+
+<h3 id="pinning-dependencies-to-specific-versions">Pinning dependencies to specific versions</h3>
+
+<p>The most common way to define specific versions of dependencies is to
+create a dependency file that references specific tags or commits in
+the different packaging systems the code is located in.</p>
+
+<p>The dependency management tool is used to get, build and install the
+library. One advantage is that your project repository continues to
+only use the specific library with the state you expect.</p>
+
+<h3 id="pinning-dependencies-to-specific-versions-in-go">Pinning dependencies to specific versions in Go</h3>
+
+<p><code>go get</code> does not have an explicit concept of versions. As a result,
+different members of a team could be importing different versions of
+any libraries being used. This is less than ideal.</p>
+
+<p>Different dependencies may introduce incompatibilities, security
+vulnerabilities, or be removed entirely. For these reasons, it’s
+better to have more control over the upgrade process when building a
+real-world application.</p>
+
+<h3 id="what-have-we-chosen">What have we chosen?</h3>
+
+<p>As well as being able to pin versions of libraries we use, another
+requirement for us was being able to compile and run Go code without
+requiring a global <code>$GOPATH</code> to be in place.</p>
+
+<p>Our current solution is either <a href="https://github.com/tools/godep">Godep</a>
+or <a href="https://github.com/mattn/gom">gom</a>, depending on the
+project. We’ve chosen two options because different projects have
+different requirements. For some projects we want to pin a specific
+version but don’t mind downloading dependencies and don’t require a
+fixed <code>$GOPATH</code>. Whereas for others we want to vendor the dependencies
+because of how we view the code and the respective binary we generate.</p>
+
+<h3 id="godep-vs-gom">Godep vs. gom</h3>
+
+<p>Godep’s preferred specification format is JSON. It will create a
+dependency file and create copies of all of your libraries into a
+<code>Godeps</code> directory at the root of your package. The expectation being
+that the libraries will be checked in with the rest of your code once
+you start using Godep.</p>
+
+<p>In comparison, gom is very similar to Ruby’s bundler. It expects a
+Gomfile to list the dependencies of the project, in a Ruby-like syntax
+which will be familiar to Bundler users. The dependencies are
+downloaded into a <code>_vendor</code> directory and there’s no need to
+explicitly check this into source control if you don’t need to. One
+added bonus for gom is that if the gom tool is available on your
+<code>$PATH</code> there’s no need to compile your project within a <code>$GOPATH</code> as
+this will be automatically set to use the specific dependencies you
+reference in your Gomfile.</p>
+
+<h3 id="what-next">What next?</h3>
+
+<p>For now, both Godep and gom works for us. Should a consensus emerge
+from the Go community over what to use, we’ll look at switching again.</p>
+
+    </article>
+
+      <footer>
+        <p>&copy; 2008-2016 Kushal Pisavadia</p>
+      </footer>
+
+    </div> 
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-7630245-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+  </body>
+</html>
+
