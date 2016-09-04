@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Violently Mild</title>
-    <link>http://www.violentlymild.com/</link>
+    <link>https://www.violentlymild.com/</link>
     <description>Recent content on Violently Mild</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Tue, 10 Nov 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://www.violentlymild.com/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.violentlymild.com/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Deployment Contracts</title>
-      <link>http://www.violentlymild.com/posts/deployment-contracts/</link>
+      <link>https://www.violentlymild.com/posts/deployment-contracts/</link>
       <pubDate>Tue, 10 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/deployment-contracts/</guid>
+      <guid>https://www.violentlymild.com/posts/deployment-contracts/</guid>
       <description>
 
 &lt;p&gt;I’ve been in a number of discussions recently around how to improve
@@ -74,7 +74,7 @@ live. Let’s assume this interaction starts with a user interface:&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://www.violentlymild.com/images/service-create.jpg&#34; alt=&#34;Example deployment form&#34; /&gt;
+        &lt;img src=&#34;https://www.violentlymild.com/images/service-create.jpg&#34; alt=&#34;Example deployment form&#34; /&gt;
     
     
 &lt;/figure&gt;
@@ -255,10 +255,10 @@ the best move.&lt;/p&gt;
     
     <item>
       <title>What will happen in the next year?</title>
-      <link>http://www.violentlymild.com/posts/what-will-happen-in-the-next-year/</link>
+      <link>https://www.violentlymild.com/posts/what-will-happen-in-the-next-year/</link>
       <pubDate>Mon, 30 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/what-will-happen-in-the-next-year/</guid>
+      <guid>https://www.violentlymild.com/posts/what-will-happen-in-the-next-year/</guid>
       <description>&lt;p&gt;I recently attended &lt;a href=&#34;http://www.scalesummit.org/&#34;&gt;Scale Summit&lt;/a&gt;. It’s
 an &lt;a href=&#34;https://en.wikipedia.org/wiki/Unconference&#34;&gt;unconference&lt;/a&gt; that’s
 been running on and off for a few years. Every year there’s a regular
@@ -305,10 +305,10 @@ diverse, productive and inclusive teams.&lt;/p&gt;
     
     <item>
       <title>Solving problems with dependency management in Go</title>
-      <link>http://www.violentlymild.com/posts/solving-problems-with-dependency-management-in-go/</link>
+      <link>https://www.violentlymild.com/posts/solving-problems-with-dependency-management-in-go/</link>
       <pubDate>Tue, 24 Feb 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/solving-problems-with-dependency-management-in-go/</guid>
+      <guid>https://www.violentlymild.com/posts/solving-problems-with-dependency-management-in-go/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;This is a blog post I wrote for the GDS Technology blog. You can read
@@ -422,10 +422,10 @@ from the Go community over what to use, we’ll look at switching again.&lt;/p&g
     
     <item>
       <title>Running a game day for GOV.UK</title>
-      <link>http://www.violentlymild.com/posts/running-a-game-day-for-gov-uk/</link>
+      <link>https://www.violentlymild.com/posts/running-a-game-day-for-gov-uk/</link>
       <pubDate>Fri, 06 Feb 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/running-a-game-day-for-gov-uk/</guid>
+      <guid>https://www.violentlymild.com/posts/running-a-game-day-for-gov-uk/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;This is a blog post I wrote for the GDS Technology blog. You can read
@@ -605,10 +605,10 @@ GOV.UK and within product teams.&lt;/p&gt;
     
     <item>
       <title>Using Go in government</title>
-      <link>http://www.violentlymild.com/posts/using-go-in-government/</link>
+      <link>https://www.violentlymild.com/posts/using-go-in-government/</link>
       <pubDate>Fri, 14 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/using-go-in-government/</guid>
+      <guid>https://www.violentlymild.com/posts/using-go-in-government/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;This is cross posted from the
@@ -741,10 +741,10 @@ soon.&lt;/p&gt;
     
     <item>
       <title>Taking another look at GOV.UK’s disaster recovery</title>
-      <link>http://www.violentlymild.com/posts/taking-another-look-at-gov-uks-disaster-recovery/</link>
+      <link>https://www.violentlymild.com/posts/taking-another-look-at-gov-uks-disaster-recovery/</link>
       <pubDate>Wed, 27 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/taking-another-look-at-gov-uks-disaster-recovery/</guid>
+      <guid>https://www.violentlymild.com/posts/taking-another-look-at-gov-uks-disaster-recovery/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;This is a blog post I wrote for the GDS Technology blog. You can read
@@ -853,10 +853,10 @@ back in 2012.&lt;/p&gt;
     
     <item>
       <title>Just a few more tweaks</title>
-      <link>http://www.violentlymild.com/posts/just-a-few-more-tweaks/</link>
+      <link>https://www.violentlymild.com/posts/just-a-few-more-tweaks/</link>
       <pubDate>Fri, 12 Feb 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/just-a-few-more-tweaks/</guid>
+      <guid>https://www.violentlymild.com/posts/just-a-few-more-tweaks/</guid>
       <description>
 
 &lt;p&gt;Whether you’re a designer or developer, tweaks can become the bane of
@@ -867,7 +867,7 @@ thorough as you’d like, so when should you be doing those tweaks?&lt;/p&gt;
 &lt;h3 id=&#34;solving-usability-problems&#34;&gt;Solving usability problems&lt;/h3&gt;
 
 &lt;p&gt;In a previous post I explained
-&lt;a href=&#34;http://www.violentlymild.com/posts/why-you-should-do-usability-testing/&#34;&gt;why you should do usability testing&lt;/a&gt;. Something
+&lt;a href=&#34;https://www.violentlymild.com/posts/why-you-should-do-usability-testing/&#34;&gt;why you should do usability testing&lt;/a&gt;. Something
 that I neglected to explain is that doing usability testing shouldn’t
 trigger mass rewrites of code or entire redesigns of
 functionality. Once you’ve got your results and have them prioritised
@@ -909,10 +909,10 @@ basis, you won’t cause yourself too many major issues.&lt;/p&gt;
     
     <item>
       <title>Can you teach me how to make computer games?</title>
-      <link>http://www.violentlymild.com/posts/can-you-teach-me-how-to-make-computer-games/</link>
+      <link>https://www.violentlymild.com/posts/can-you-teach-me-how-to-make-computer-games/</link>
       <pubDate>Thu, 04 Feb 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/can-you-teach-me-how-to-make-computer-games/</guid>
+      <guid>https://www.violentlymild.com/posts/can-you-teach-me-how-to-make-computer-games/</guid>
       <description>
 
 &lt;p&gt;I was asked recently by a friend to teach his son — we’ll call him
@@ -998,10 +998,10 @@ Ruby. &lt;a href=&#34;http://mislav.uniqpath.com/poignant-guide/book/chapter-3.h
     
     <item>
       <title>Why you should do usability testing</title>
-      <link>http://www.violentlymild.com/posts/why-you-should-do-usability-testing/</link>
+      <link>https://www.violentlymild.com/posts/why-you-should-do-usability-testing/</link>
       <pubDate>Thu, 28 Jan 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/why-you-should-do-usability-testing/</guid>
+      <guid>https://www.violentlymild.com/posts/why-you-should-do-usability-testing/</guid>
       <description>
 
 &lt;p&gt;I recently completed my first usability test and while it wasn’t very
@@ -1083,10 +1083,10 @@ were a great deal more than that. Happy testing.&lt;/p&gt;
     
     <item>
       <title>Working to constraints</title>
-      <link>http://www.violentlymild.com/posts/working-to-constraints/</link>
+      <link>https://www.violentlymild.com/posts/working-to-constraints/</link>
       <pubDate>Fri, 22 Jan 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/working-to-constraints/</guid>
+      <guid>https://www.violentlymild.com/posts/working-to-constraints/</guid>
       <description>&lt;p&gt;I’ve been reading the 37signals &lt;a href=&#34;http://37signals.com/svn/&#34;&gt;SVN blog&lt;/a&gt;
 for a while now, but a
 &lt;a href=&#34;http://ecorner.stanford.edu/authorMaterialInfo.html?mid=2334&#34;&gt;recent talk&lt;/a&gt;
@@ -1157,10 +1157,10 @@ elegant solutions.&lt;/p&gt;
     
     <item>
       <title>Removable storage is just for the spec sheets</title>
-      <link>http://www.violentlymild.com/posts/removable-storage-is-just-for-the-spec-sheets/</link>
+      <link>https://www.violentlymild.com/posts/removable-storage-is-just-for-the-spec-sheets/</link>
       <pubDate>Tue, 12 Jan 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/removable-storage-is-just-for-the-spec-sheets/</guid>
+      <guid>https://www.violentlymild.com/posts/removable-storage-is-just-for-the-spec-sheets/</guid>
       <description>&lt;p&gt;Google released their &lt;em&gt;official phone&lt;/em&gt; early last week: the
 &lt;a href=&#34;http://www.google.com/phone&#34;&gt;Nexus One&lt;/a&gt;. Putting aside the fact that
 they’ve completely
@@ -1237,10 +1237,10 @@ myself a lot of &lt;em&gt;wasted&lt;/em&gt; money on applications.&lt;/p&gt;
     
     <item>
       <title>Designing an interface to create interfaces</title>
-      <link>http://www.violentlymild.com/posts/designing-an-interface-to-create-interfaces/</link>
+      <link>https://www.violentlymild.com/posts/designing-an-interface-to-create-interfaces/</link>
       <pubDate>Sat, 02 Jan 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/posts/designing-an-interface-to-create-interfaces/</guid>
+      <guid>https://www.violentlymild.com/posts/designing-an-interface-to-create-interfaces/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;I’ve been reading&lt;/em&gt; &lt;a href=&#34;http://www.codersatwork.com/&#34;&gt;&lt;em&gt;Coders at Work&lt;/em&gt;&lt;/a&gt;
@@ -1346,10 +1346,10 @@ yet. Please let me know if you have any further useful information.&lt;/em&gt;&l
     
     <item>
       <title>Talks</title>
-      <link>http://www.violentlymild.com/talks/</link>
+      <link>https://www.violentlymild.com/talks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://www.violentlymild.com/talks/</guid>
+      <guid>https://www.violentlymild.com/talks/</guid>
       <description>
 
 &lt;p&gt;This is a list of the talks that I’ve given or am going to give.&lt;/p&gt;
