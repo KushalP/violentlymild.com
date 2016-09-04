@@ -1,4 +1,4 @@
-baseurl = "http://www.violentlymild.com/"
+baseurl = "https://www.violentlymild.com/"
 languageCode = "en-gb"
 title = "Violently Mild"
 theme = "violentlymild"

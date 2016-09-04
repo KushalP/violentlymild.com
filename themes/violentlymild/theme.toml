@@ -2,9 +2,9 @@ name = "Violently Mild"
 license = "MIT"
 licenselink = "https://github.com/KushalP/violentlymild/blob/master/LICENSE.md"
 description = ""
-homepage = "http://violentlymild.com/"
+homepage = "https://violentlymild.com/"
 min_version = 0.15
 
 [author]
   name = "Kushal Pisavadia"
-  homepage = "http://violentlymild.com/"
+  homepage = "https://violentlymild.com/"
