@@ -1,6 +1,7 @@
 +++
 date = "2010-01-12T00:00:00Z"
 title = "Removable storage is just for the spec sheets"
+aliases = ["removable-storage-is-just-for-the-spec-sheets"]
 +++
 
 Google released their _official phone_ early last week: the

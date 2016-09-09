@@ -1,6 +1,7 @@
 +++
 date = "2015-02-24T00:00:00Z"
 title = "Solving problems with dependency management in Go"
+aliases = ["solving-problems-with-dependency-management-in-go"]
 +++
 
 _This is a blog post I wrote for the GDS Technology blog. You can read

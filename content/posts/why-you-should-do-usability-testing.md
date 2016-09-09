@@ -1,6 +1,7 @@
 +++
 date = "2010-01-28T00:00:00Z"
 title = "Why you should do usability testing"
+aliases = ["why-you-should-do-usability-testing"]
 +++
 
 I recently completed my first usability test and while it wasn’t very

@@ -1,6 +1,7 @@
 +++
 date = "2015-11-10T00:00:00Z"
 title = "Deployment Contracts"
+aliases = ["deployment-contracts"]
 +++
 
 I’ve been in a number of discussions recently around how to improve

@@ -1,6 +1,7 @@
 +++
 date = "2015-03-30T00:00:00Z"
 title = "What will happen in the next year?"
+aliases = ["what-will-happen-in-the-next-year"]
 +++
 
 I recently attended [Scale Summit](http://www.scalesummit.org/). It’s

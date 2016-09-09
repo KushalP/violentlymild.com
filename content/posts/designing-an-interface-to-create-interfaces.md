@@ -1,6 +1,7 @@
 +++
 date = "2010-01-02T00:00:00Z"
 title = "Designing an interface to create interfaces"
+aliases = ["designing-an-interface-to-create-interfaces"]
 +++
 
 _I’ve been reading_ [_Coders at Work_](http://www.codersatwork.com/)

@@ -1,6 +1,7 @@
 +++
 date = "2014-08-27T00:00:00Z"
 title = "Taking another look at GOV.UK’s disaster recovery"
+aliases = ["taking-another-look-at-gov-uks-disaster-recovery"]
 +++
 
 _This is a blog post I wrote for the GDS Technology blog. You can read

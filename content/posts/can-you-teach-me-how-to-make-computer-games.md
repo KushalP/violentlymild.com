@@ -1,6 +1,7 @@
 +++
 date = "2010-02-04T00:00:00Z"
 title = "Can you teach me how to make computer games?"
+aliases = ["can-you-teach-me-how-to-make-computer-games"]
 +++
 
 I was asked recently by a friend to teach his son — we’ll call him

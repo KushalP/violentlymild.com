@@ -1,6 +1,7 @@
 +++
 date = "2014-11-14T00:00:00Z"
 title = "Using Go in government"
+aliases = ["using-go-in-government"]
 +++
 
 _This is cross posted from the

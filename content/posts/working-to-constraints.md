@@ -1,6 +1,7 @@
 +++
 date = "2010-01-22T00:00:00Z"
 title = "Working to constraints"
+aliases = ["working-to-constraints"]
 +++
 
 I’ve been reading the 37signals [SVN blog](http://37signals.com/svn/)

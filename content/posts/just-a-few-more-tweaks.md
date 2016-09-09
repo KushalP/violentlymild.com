@@ -1,6 +1,7 @@
 +++
 date = "2010-02-12T00:00:00Z"
 title = "Just a few more tweaks"
+aliases = ["just-a-few-more-tweaks"]
 +++
 
 Whether you’re a designer or developer, tweaks can become the bane of

@@ -1,6 +1,7 @@
 +++
 date = "2015-02-06T00:00:00Z"
 title = "Running a game day for GOV.UK"
+aliases = ["running-a-game-day-for-gov-uk"]
 +++
 
 _This is a blog post I wrote for the GDS Technology blog. You can read
