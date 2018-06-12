@@ -16,3 +16,15 @@ You can build the website using the provided `Makefile`:
 ```
 $ make build
 ```
+
+## Development
+
+A useful way to iterate on this repository and see the result of your
+changes is to use
+[watchman](https://facebook.github.io/watchman/). Then you can
+integrate watchman with `make` by running the following to have the
+project rebuilt on each change:
+
+```
+$ watchman-make -p 'content/**' -t build -p 'static/**' -t build -p 'themes/**' -t build
+```
