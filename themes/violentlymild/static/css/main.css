@@ -1,3 +1,5 @@
+@import url("reset.css");*
+
 /* HTML5 reset */
 article, aside, dialog, figure, footer, header, hgroup, menu, nav, section {
     display: block
@@ -114,6 +116,12 @@ a:hover {
 
 div.highlight + * {
     margin-top: 1em;
+}
+
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
 }
 
 footer {
