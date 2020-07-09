@@ -8,7 +8,7 @@ aliases = ["reverse-engineering-linear-congruential-generators"]
 of software and this blog post contains some rough notes on what we
 did at a specific step*
 
-# Producing random numbers
+## Producing random numbers
 
 When doing common cryptographic operations it’s important to be able
 to produce a random number. The goal is to produce a number or a set
@@ -31,7 +31,7 @@ generator](https://en.wikipedia.org/wiki/Linear_congruential_generator). Due
 to their *linear* nature however if you observe enough of numbers
 generated you can work out how the numbers are produced.
 
-# Linear congruential generator
+## Linear congruential generator
 
 A linear congruential generator (LCG) is an algorithm that produces a
 sequence of pseudorandom numbers. It’s one of the oldest algorithms,
@@ -93,14 +93,14 @@ Given that the seeded state value, multiplier, increment, and modulus
 value are all stated here, we can create another LCG and it will
 always produce the above output.
 
-# Reverse engineering the algorithm
+## Reverse engineering the algorithm
 
 It rarely occurs in cryptography research, but having the linear
 output of a pseudorandom number generator means we can use this
 information to work out what the initial values are. We can reverse
 engineer it!
 
-## The maths
+### The maths
 
 In our Rust example above you can see that the state is updated by
 applying two constant (multiplier and increment) and a modulus to the
@@ -109,7 +109,7 @@ state. If you have three successive outputs (s0, s1, and s2) then you
 get two linear equations in two unknowns (multiplier and increment),
 which can be solved with simple arithmetic.
 
-## An unknown increment
+### An unknown increment
 
 Let’s assume that we don’t know one parameter of our LCG: the
 increment.
@@ -141,7 +141,7 @@ find_unknown_increment(&states, lgc.multiplier, lgc.modulus)
 => (6329, 43291, 4294967301)
 ```
 
-# An unknown increment and multiplier
+## An unknown increment and multiplier
 
 Let’s make things a little difficult now and assume that we don’t know
 the increment or the multiplier, and only know the modulus. We know
@@ -197,7 +197,7 @@ find_unknown_multiplier(&states, lgc.modulus)
 => (6329, 43291, 4294967301)
 ```
 
-# All parameters are unknown
+## All parameters are unknown
 
 Let’s really make it more realistic now and assume that all parameters
 are unknown. This is exactly the scenario that we were dealing with.
@@ -205,7 +205,7 @@ are unknown. This is exactly the scenario that we were dealing with.
 We don’t know the modulus value so every equation we form will have
 another unknown that we’ll have to deal with.
 
-## Greatest common divisor
+### Greatest common divisor
 
 In mathematics, if you have a set of random multiples of N there is a
 large probability that their greatest common divisor will be equal to
@@ -278,7 +278,7 @@ find_unknown_params(&states)
 => (6329, 43291, 4294967301)
 ```
 
-## Summary
+### What we've done
 
 With this method we have just reverse engineered an LCG, without brute
 forcing and with close to zero knowledge. We have done this by
@@ -295,7 +295,7 @@ simple techniques like truncating the produced value each time
 modulo operation on the way. This is all done to improve the number
 distribution of the PRNG.
 
-## Using the default values
+### Using the default values
 
 If you do come across a linear sequence in the real world, there are
 simpler steps you can take than trying to sequence them using the
@@ -320,7 +320,7 @@ let lgc = LinearCongruentialGenerator {
 };
 ```
 
-# References
+## References
 
 A lot of what I’ve covered in this blog has been learnt from George
 Marsaglia’s paper [Random numbers fall mainly in the

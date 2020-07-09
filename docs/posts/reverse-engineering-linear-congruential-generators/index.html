@@ -38,7 +38,7 @@
       <p><em>Last year I helped a friend as they tried to reverse engineer a piece
 of software and this blog post contains some rough notes on what we
 did at a specific step</em></p>
-<h1 id="producing-random-numbers">Producing random numbers</h1>
+<h2 id="producing-random-numbers">Producing random numbers</h2>
 <p>When doing common cryptographic operations it’s important to be able
 to produce a random number. The goal is to produce a number or a set
 of numbers, such that there is no way to reliably predict how that
@@ -54,7 +54,7 @@ System<span style="color:#000;font-weight:bold">.</span><span style="color:#0080
 generator</a>. Due
 to their <em>linear</em> nature however if you observe enough of numbers
 generated you can work out how the numbers are produced.</p>
-<h1 id="linear-congruential-generator">Linear congruential generator</h1>
+<h2 id="linear-congruential-generator">Linear congruential generator</h2>
 <p>A linear congruential generator (LCG) is an algorithm that produces a
 sequence of pseudorandom numbers. It’s one of the oldest algorithms,
 easy to implement, and fast. It could be used when generating some
@@ -101,19 +101,19 @@ initial values in the process of creating a salt, nonce, or key.</p>
 </code></pre><p>Given that the seeded state value, multiplier, increment, and modulus
 value are all stated here, we can create another LCG and it will
 always produce the above output.</p>
-<h1 id="reverse-engineering-the-algorithm">Reverse engineering the algorithm</h1>
+<h2 id="reverse-engineering-the-algorithm">Reverse engineering the algorithm</h2>
 <p>It rarely occurs in cryptography research, but having the linear
 output of a pseudorandom number generator means we can use this
 information to work out what the initial values are. We can reverse
 engineer it!</p>
-<h2 id="the-maths">The maths</h2>
+<h3 id="the-maths">The maths</h3>
 <p>In our Rust example above you can see that the state is updated by
 applying two constant (multiplier and increment) and a modulus to the
 existing state. The new state is a successive value of the existing
 state. If you have three successive outputs (s0, s1, and s2) then you
 get two linear equations in two unknowns (multiplier and increment),
 which can be solved with simple arithmetic.</p>
-<h2 id="an-unknown-increment">An unknown increment</h2>
+<h3 id="an-unknown-increment">An unknown increment</h3>
 <p>Let’s assume that we don’t know one parameter of our LCG: the
 increment.</p>
 <p>We can work out the increment parameter for an LCG using a simple
@@ -132,7 +132,7 @@ increment = (49620 - 1 *       6329) % 4294967301
 receive the following tuple:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">find_unknown_increment(<span style="color:#000;font-weight:bold">&amp;</span>states,<span style="color:#bbb"> </span>lgc.multiplier,<span style="color:#bbb"> </span>lgc.modulus)<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#099">6329</span>,<span style="color:#bbb"> </span><span style="color:#099">43291</span>,<span style="color:#bbb"> </span><span style="color:#099">4294967301</span>)<span style="color:#bbb">
-</span></code></pre></div><h1 id="an-unknown-increment-and-multiplier">An unknown increment and multiplier</h1>
+</span></code></pre></div><h2 id="an-unknown-increment-and-multiplier">An unknown increment and multiplier</h2>
 <p>Let’s make things a little difficult now and assume that we don’t know
 the increment or the multiplier, and only know the modulus. We know
 that our LCG generates numbers using the following linear equation:</p>
@@ -172,12 +172,12 @@ multiplier = (s2 - s1) / (s1 - s0) % modulus
 expected:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">find_unknown_multiplier(<span style="color:#000;font-weight:bold">&amp;</span>states,<span style="color:#bbb"> </span>lgc.modulus)<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#099">6329</span>,<span style="color:#bbb"> </span><span style="color:#099">43291</span>,<span style="color:#bbb"> </span><span style="color:#099">4294967301</span>)<span style="color:#bbb">
-</span></code></pre></div><h1 id="all-parameters-are-unknown">All parameters are unknown</h1>
+</span></code></pre></div><h2 id="all-parameters-are-unknown">All parameters are unknown</h2>
 <p>Let’s really make it more realistic now and assume that all parameters
 are unknown. This is exactly the scenario that we were dealing with.</p>
 <p>We don’t know the modulus value so every equation we form will have
 another unknown that we’ll have to deal with.</p>
-<h2 id="greatest-common-divisor">Greatest common divisor</h2>
+<h3 id="greatest-common-divisor">Greatest common divisor</h3>
 <p>In mathematics, if you have a set of random multiples of N there is a
 large probability that their greatest common divisor will be equal to
 N. Here is some code as an example:</p>
@@ -232,7 +232,7 @@ the multiplier and the increment.</p>
 </span><span style="color:#bbb">
 </span><span style="color:#bbb"></span>find_unknown_params(<span style="color:#000;font-weight:bold">&amp;</span>states)<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#099">6329</span>,<span style="color:#bbb"> </span><span style="color:#099">43291</span>,<span style="color:#bbb"> </span><span style="color:#099">4294967301</span>)<span style="color:#bbb">
-</span></code></pre></div><h2 id="summary">Summary</h2>
+</span></code></pre></div><h3 id="what-weve-done">What we&rsquo;ve done</h3>
 <p>With this method we have just reverse engineered an LCG, without brute
 forcing and with close to zero knowledge. We have done this by
 observing its output.</p>
@@ -245,7 +245,7 @@ simple techniques like truncating the produced value each time
 (generate an i64 and truncate to an i32), or doing some additional
 modulo operation on the way. This is all done to improve the number
 distribution of the PRNG.</p>
-<h2 id="using-the-default-values">Using the default values</h2>
+<h3 id="using-the-default-values">Using the default values</h3>
 <p>If you do come across a linear sequence in the real world, there are
 simpler steps you can take than trying to sequence them using the
 approach outlined above.</p>
@@ -263,7 +263,7 @@ java.util.Random, POSIX rand48, and glibc rand48:</p>
 </span><span style="color:#bbb">    </span>increment: <span style="color:#099">11</span>,<span style="color:#bbb">
 </span><span style="color:#bbb">    </span>modulus: <span style="color:#099">2.</span>pow(<span style="color:#099">48</span>)<span style="color:#bbb">
 </span><span style="color:#bbb"></span>};<span style="color:#bbb">
-</span></code></pre></div><h1 id="references">References</h1>
+</span></code></pre></div><h2 id="references">References</h2>
 <p>A lot of what I’ve covered in this blog has been learnt from George
 Marsaglia’s paper <a href="https://www.pnas.org/content/61/1/25">Random numbers fall mainly in the
 planes</a>. In that paper he
