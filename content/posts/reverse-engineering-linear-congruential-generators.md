@@ -23,7 +23,7 @@ An example of this is Java's java.util.Random:
 
 ```java
 Random random = new Random();
-System.out.format("random integer = %d\n", random.nextInt());
+System.out.println(random.nextInt());
 ```
 
 One of the most widely used PRNGs is a [linear congruential
@@ -64,8 +64,13 @@ impl Iterator for LinearCongruentialGenerator {
     type Item = i128;
 
     fn next(&mut self) -> Option<i128> {
-        let next_state =
-            (self.state * self.multiplier + self.increment) % self.modulus;
+        // Using these variables to mimic the equation.
+        let s = self.state
+        let a = self.multiplier
+        let b = self.increment
+        let m = self.modulus
+
+        let next_state = (a * s + b) % m;
         self.state = next_state;
         Some(next_state)
     }
@@ -76,8 +81,8 @@ fn main() {
         state: 1, // Our seed value when we begin.
         multiplier: 6329,
         increment: 43291,
-        // Picking this value because it's a prime number: 2**32 + 5
-        modulus: 4294967301,
+        // Picking this value because it's a prime number.
+        modulus: 4294967301, // 2**32 + 5
     };
 
     let states: Vec<i128> = lgc.take(10).collect();
@@ -89,7 +94,6 @@ If you were to compile and run this it would produce the following output:
 
 ```
 states: [49620, 314088271, 3589817388, 3872236954, 304305651, 1805157622, 229612269, 1517146054, 2765501322, 866158654]
-
 ```
 
 Given that the seeded state value, multiplier, increment, and modulus
@@ -132,7 +136,8 @@ fn find_unknown_increment(
     multiplier: i128,
     modulus: i128
 ) -> (i128, i128, i128) {
-    let increment = (states[1] - states[0] * multiplier) % modulus;
+    let increment =
+        (states[1] - states[0] * multiplier) % modulus;
     (multiplier, increment, modulus)
 }
 ```
@@ -141,7 +146,11 @@ Passing in the output state above, the multiplier, and modulus we will
 receive the following tuple:
 
 ```rust
-find_unknown_increment(&states, lgc.multiplier, lgc.modulus)
+find_unknown_increment(
+    &states,
+    lgc.multiplier,
+    lgc.modulus
+)
 => (6329, 43291, 4294967301)
 ```
 
@@ -165,6 +174,8 @@ s2 - s1 = s1 * multiplier - s0 * multiplier % modulus
 s2 - s1 = multiplier * (s1 - s0) % modulus
 multiplier = (s2 - s1) / (s1 - s0) % modulus
 ```
+
+In rust:
 
 ```rust
 /// Implementation of the extended Euclidean algorithm
@@ -193,7 +204,9 @@ fn find_unknown_multiplier(
 ) -> (i128, i128, i128) {
     let inverse_modulus =
         mod_inverse(states[1] - states[0], modulus).unwrap()
-    let multiplier = (states[2] - states[1]) * inverse_modulus % modulus;
+    let multiplier =
+        (states[2] - states[1]) * inverse_modulus % modulus;
+
     find_unknown_increment(states, multiplier, modulus)
 }
 ```
@@ -230,10 +243,12 @@ fn gcd(a: i128, b: i128) -> i128 {
 }
 
 let n: i128 = 17;
+let v = vec![1, 2, 3];
 let mut rng = rand::thread_rng();
-let random_numbers: Vec<i128> = vec![1, 2, 3].iter().map(|_|
-    rng.gen::<u32>() as i128 * n
-).collect();
+let random_numbers: Vec<i128> =
+    v.iter().map(|_|
+        rng.gen::<u32>() as i128 * n
+    ).collect();
 random_numbers.iter().fold(0, |a, b| gcd(a, *b))
 => 17
 ```
@@ -256,19 +271,19 @@ Here is how this would be modelled:
 ```
 // Calculate the difference of the states
 t0 = s1 - s0
-t1 = s2 - s1 = (s1 * m + c) - (s0 * m + c) = m * (s1 - s0) = m * t0 (mod n)
-t2 = s3 - s2 = (s2 * m + c) - (s1 * m + c) = m * (s2 - s1) = m * t1 (mod n)
+t1 = s2 - s1 = (s1 * m + c) - (s0 * m + c)
+t2 = s3 - s2 = (s2 * m + c) - (s1 * m + c)
 
-// Can also be modelled as
-t1 = (s1 * m + c) - (s0 * m + c) = m * (s1 - s0) = m * t0 (mod n)
-t2 = (s2 * m + c) - (s1 * m + c) = m * (s2 - s1) = m * t1 (mod n)
+t1 = t0 (mod n)
+t2 = t1 (mod n)
 
 // Can also be modelled as
 t1 = m * (s1 - s0) = m * t0 (mod n)
 t2 = m * (s2 - s1) = m * t1 (mod n)
 
 // Build a matrix of the differences
-u0 = t2 * t0 - t1 * t1 = (m * m * t0 * t0) - (m * t0 * m * t0) = 0 (mod n)
+u0 = t2 * t0 - t1 * t1 = 0 (mod n)
+u0 = (m * m * t0 * t0) - (m * t0 * m * t0)
 
 // Find the greatest common divisor of the differences
 m = gcd(u0, u1, u2, ...)
@@ -287,8 +302,10 @@ fn find_unknown_params(states: &[i128]) -> (i128, i128, i128) {
     let diffs: Vec<i128> =
         zipped_states.map(|(k0, k1)| k1 - k0).collect();
     // Build the matrix of the differences
+    let offset_diffs_1 = diffs.iter().skip(1);
+    let offset_diffs_2 = diffs.iter().skip(2);
     let zipped_diffs =
-      diffs.iter().zip(diffs.iter().skip(1)).zip(diffs.iter().skip(2));
+        diffs.iter().zip(offset_diffs_1).zip(offset_diffs_2);
     let zeroes = zipped_diffs.map(|((s0, s1), s2)| s2 * s0 - s1 * s1);
     // Find the greatest common divisor of the differences
     let modulus = zeroes.fold(0, |a, b| gcd(a, b));

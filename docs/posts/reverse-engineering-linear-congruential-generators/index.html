@@ -49,7 +49,7 @@ generator</a>
 (PRNG) instead.</p>
 <p>An example of this is Java&rsquo;s java.util.Random:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Random random <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Random<span style="color:#000;font-weight:bold">();</span>
-System<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">out</span><span style="color:#000;font-weight:bold">.</span><span style="color:#008080">format</span><span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;random integer = %d\n&#34;</span><span style="color:#000;font-weight:bold">,</span> random<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">nextInt</span><span style="color:#000;font-weight:bold">());</span>
+System<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">out</span><span style="color:#000;font-weight:bold">.</span><span style="color:#008080">println</span><span style="color:#000;font-weight:bold">(</span>random<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">nextInt</span><span style="color:#000;font-weight:bold">());</span>
 </code></pre></div><p>One of the most widely used PRNGs is a <a href="https://en.wikipedia.org/wiki/Linear_congruential_generator">linear congruential
 generator</a>. Due
 to their <em>linear</em> nature however if you observe enough of numbers
@@ -79,8 +79,13 @@ initial values in the process of creating a salt, nonce, or key.</p>
 </span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">type</span> <span style="color:#458;font-weight:bold">Item</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>i128;<span style="color:#bbb">
 </span><span style="color:#bbb">
 </span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">next</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;</span>i128<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>next_state<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
-</span><span style="color:#bbb">            </span>(<span style="color:#999">self</span>.state<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.multiplier<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.increment)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.modulus;<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Using these variables to mimic the equation.
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.state<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.multiplier<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.increment<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>m<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.modulus<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>next_state<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>(a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>b)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>m;<span style="color:#bbb">
 </span><span style="color:#bbb">        </span><span style="color:#999">self</span>.state<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>next_state;<span style="color:#bbb">
 </span><span style="color:#bbb">        </span><span style="color:#0086b3">Some</span>(next_state)<span style="color:#bbb">
 </span><span style="color:#bbb">    </span>}<span style="color:#bbb">
@@ -91,16 +96,15 @@ initial values in the process of creating a salt, nonce, or key.</p>
 </span><span style="color:#bbb">        </span>state: <span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// Our seed value when we begin.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>multiplier: <span style="color:#099">6329</span>,<span style="color:#bbb">
 </span><span style="color:#bbb">        </span>increment: <span style="color:#099">43291</span>,<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Picking this value because it&#39;s a prime number: 2**32 + 5
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>modulus: <span style="color:#099">4294967301</span>,<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Picking this value because it&#39;s a prime number.
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>modulus: <span style="color:#099">4294967301</span>,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// 2**32 + 5
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>};<span style="color:#bbb">
 </span><span style="color:#bbb">
 </span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>states: <span style="color:#0086b3">Vec</span><span style="color:#000;font-weight:bold">&lt;</span>i128<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>lgc.take(<span style="color:#099">10</span>).collect();<span style="color:#bbb">
 </span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;states: {:?}&#34;</span>,<span style="color:#bbb"> </span>states);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></div><p>If you were to compile and run this it would produce the following output:</p>
 <pre><code>states: [49620, 314088271, 3589817388, 3872236954, 304305651, 1805157622, 229612269, 1517146054, 2765501322, 866158654]
-
 </code></pre><p>Given that the seeded state value, multiplier, increment, and modulus
 value are all stated here, we can create another LCG and it will
 always produce the above output.</p>
@@ -132,12 +136,17 @@ we can model them next to each other:</p>
 </span><span style="color:#bbb">    </span>multiplier: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb">
 </span><span style="color:#bbb">    </span>modulus: <span style="color:#458;font-weight:bold">i128</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span>)<span style="color:#bbb"> </span>-&gt; (i128,<span style="color:#bbb"> </span>i128,<span style="color:#bbb"> </span>i128)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>increment<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>(states[<span style="color:#099">1</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">0</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>multiplier)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>modulus;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>increment<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span>(states[<span style="color:#099">1</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">0</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>multiplier)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>modulus;<span style="color:#bbb">
 </span><span style="color:#bbb">    </span>(multiplier,<span style="color:#bbb"> </span>increment,<span style="color:#bbb"> </span>modulus)<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></div><p>Passing in the output state above, the multiplier, and modulus we will
 receive the following tuple:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">find_unknown_increment(<span style="color:#000;font-weight:bold">&amp;</span>states,<span style="color:#bbb"> </span>lgc.multiplier,<span style="color:#bbb"> </span>lgc.modulus)<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">find_unknown_increment(<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">&amp;</span>states,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>lgc.multiplier,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>lgc.modulus<span style="color:#bbb">
+</span><span style="color:#bbb"></span>)<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#099">6329</span>,<span style="color:#bbb"> </span><span style="color:#099">43291</span>,<span style="color:#bbb"> </span><span style="color:#099">4294967301</span>)<span style="color:#bbb">
 </span></code></pre></div><h2 id="an-unknown-increment-and-multiplier">An unknown increment and multiplier</h2>
 <p>Let’s make things a little difficult now and assume that we don’t know
@@ -151,7 +160,8 @@ these linear equations into another form to get our multiplier:</p>
 <pre><code>s2 - s1 = s1 * multiplier - s0 * multiplier % modulus
 s2 - s1 = multiplier * (s1 - s0) % modulus
 multiplier = (s2 - s1) / (s1 - s0) % modulus
-</code></pre><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#d14">/// Implementation of the extended Euclidean algorithm
+</code></pre><p>In rust:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#d14">/// Implementation of the extended Euclidean algorithm
 </span><span style="color:#d14"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">egcd</span>(a: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span>b: <span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>-&gt; (i128,<span style="color:#bbb"> </span>i128,<span style="color:#bbb"> </span>i128)<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">==</span><span style="color:#bbb"> </span><span style="color:#099">0</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">        </span>(b,<span style="color:#bbb"> </span><span style="color:#099">0</span>,<span style="color:#bbb"> </span><span style="color:#099">1</span>)<span style="color:#bbb">
@@ -177,7 +187,9 @@ multiplier = (s2 - s1) / (s1 - s0) % modulus
 </span><span style="color:#bbb"></span>)<span style="color:#bbb"> </span>-&gt; (i128,<span style="color:#bbb"> </span>i128,<span style="color:#bbb"> </span>i128)<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>inverse_modulus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
 </span><span style="color:#bbb">        </span>mod_inverse(states[<span style="color:#099">1</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">0</span>],<span style="color:#bbb"> </span>modulus).unwrap()<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>multiplier<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>(states[<span style="color:#099">2</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">1</span>])<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>inverse_modulus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>modulus;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>multiplier<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span>(states[<span style="color:#099">2</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">1</span>])<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>inverse_modulus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>modulus;<span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb">    </span>find_unknown_increment(states,<span style="color:#bbb"> </span>multiplier,<span style="color:#bbb"> </span>modulus)<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></div><p>Passing in our states and modulus, we receive the following tuple as
@@ -202,10 +214,12 @@ N. Here is some code as an example:</p>
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>n: <span style="color:#458;font-weight:bold">i128</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">17</span>;<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>v<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>vec<span style="color:#000;font-weight:bold">!</span>[<span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#099">2</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>];<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>rng<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>rand::thread_rng();<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>random_numbers: <span style="color:#0086b3">Vec</span><span style="color:#000;font-weight:bold">&lt;</span>i128<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>vec<span style="color:#000;font-weight:bold">!</span>[<span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#099">2</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>].iter().map(<span style="color:#000;font-weight:bold">|</span>_<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span>rng.gen::<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">u32</span><span style="color:#000;font-weight:bold">&gt;</span>()<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span>i128<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>n<span style="color:#bbb">
-</span><span style="color:#bbb"></span>).collect();<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>random_numbers: <span style="color:#0086b3">Vec</span><span style="color:#000;font-weight:bold">&lt;</span>i128<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>v.iter().map(<span style="color:#000;font-weight:bold">|</span>_<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span>rng.gen::<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">u32</span><span style="color:#000;font-weight:bold">&gt;</span>()<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span>i128<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>n<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>).collect();<span style="color:#bbb">
 </span><span style="color:#bbb"></span>random_numbers.iter().fold(<span style="color:#099">0</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">|</span>a,<span style="color:#bbb"> </span>b<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>gcd(a,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span>b))<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span><span style="color:#099">17</span><span style="color:#bbb">
 </span></code></pre></div><p>This is useful because we can look at some modulus operations that
@@ -219,19 +233,19 @@ take the greatest common divisor from these values and recover n.</p>
 <p>Here is how this would be modelled:</p>
 <pre><code>// Calculate the difference of the states
 t0 = s1 - s0
-t1 = s2 - s1 = (s1 * m + c) - (s0 * m + c) = m * (s1 - s0) = m * t0 (mod n)
-t2 = s3 - s2 = (s2 * m + c) - (s1 * m + c) = m * (s2 - s1) = m * t1 (mod n)
+t1 = s2 - s1 = (s1 * m + c) - (s0 * m + c)
+t2 = s3 - s2 = (s2 * m + c) - (s1 * m + c)
 
-// Can also be modelled as
-t1 = (s1 * m + c) - (s0 * m + c) = m * (s1 - s0) = m * t0 (mod n)
-t2 = (s2 * m + c) - (s1 * m + c) = m * (s2 - s1) = m * t1 (mod n)
+t1 = t0 (mod n)
+t2 = t1 (mod n)
 
 // Can also be modelled as
 t1 = m * (s1 - s0) = m * t0 (mod n)
 t2 = m * (s2 - s1) = m * t1 (mod n)
 
 // Build a matrix of the differences
-u0 = t2 * t0 - t1 * t1 = (m * m * t0 * t0) - (m * t0 * m * t0) = 0 (mod n)
+u0 = t2 * t0 - t1 * t1 = 0 (mod n)
+u0 = (m * m * t0 * t0) - (m * t0 * m * t0)
 
 // Find the greatest common divisor of the differences
 m = gcd(u0, u1, u2, ...)
@@ -246,8 +260,10 @@ the multiplier and the increment.</p>
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>diffs: <span style="color:#0086b3">Vec</span><span style="color:#000;font-weight:bold">&lt;</span>i128<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
 </span><span style="color:#bbb">        </span>zipped_states.map(<span style="color:#000;font-weight:bold">|</span>(k0,<span style="color:#bbb"> </span>k1)<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>k1<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>k0).collect();<span style="color:#bbb">
 </span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Build the matrix of the differences
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>zipped_diffs<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
-</span><span style="color:#bbb">      </span>diffs.iter().zip(diffs.iter().skip(<span style="color:#099">1</span>)).zip(diffs.iter().skip(<span style="color:#099">2</span>));<span style="color:#bbb">
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>offset_diffs_1<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>diffs.iter().skip(<span style="color:#099">1</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>offset_diffs_2<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>diffs.iter().skip(<span style="color:#099">2</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>zipped_diffs<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span>diffs.iter().zip(offset_diffs_1).zip(offset_diffs_2);<span style="color:#bbb">
 </span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>zeroes<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>zipped_diffs.map(<span style="color:#000;font-weight:bold">|</span>((s0,<span style="color:#bbb"> </span>s1),<span style="color:#bbb"> </span>s2)<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>s2<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>s0<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>s1<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>s1);<span style="color:#bbb">
 </span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Find the greatest common divisor of the differences
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>modulus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>zeroes.fold(<span style="color:#099">0</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">|</span>a,<span style="color:#bbb"> </span>b<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>gcd(a,<span style="color:#bbb"> </span>b));<span style="color:#bbb">
