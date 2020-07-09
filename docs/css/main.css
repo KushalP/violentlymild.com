@@ -112,15 +112,7 @@ a:hover {
     color: #43cccf;
 }
 
-pre + p {
-    margin-top: 1em;
-}
-
-pre + h2 {
-    margin-top: 1em;
-}
-
-pre + h3 {
+div.highlight + * {
     margin-top: 1em;
 }
 
