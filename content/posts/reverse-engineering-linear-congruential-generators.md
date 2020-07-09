@@ -1,5 +1,5 @@
 +++
-date = "2020-07-02T18:00:00Z"
+date = "2020-07-09T12:00:00Z"
 title = "Reverse engineering linear congruential generators"
 aliases = ["reverse-engineering-linear-congruential-generators"]
 +++
