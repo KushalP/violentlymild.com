@@ -6,10 +6,20 @@
     <description>Recent content on Violently Mild</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 10 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jul 2020 11:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.violentlymild.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reverse engineering linear congruential generators</title>
+      <link>https://www.violentlymild.com/posts/reverse-engineering-linear-congruential-generators/</link>
+      <pubDate>Thu, 09 Jul 2020 11:00:00 +0000</pubDate>
+      
+      <guid>https://www.violentlymild.com/posts/reverse-engineering-linear-congruential-generators/</guid>
+      <description>Last year I helped a friend as they tried to reverse engineer a piece of software and this blog post contains some rough notes on what we did at a specific step
+Producing random numbers When doing common cryptographic operations it’s important to be able to produce a random number. The goal is to produce a number or a set of numbers, such that there is no way to reliably predict how that number was generated.</description>
+    </item>
     
     <item>
       <title>Deployment Contracts</title>

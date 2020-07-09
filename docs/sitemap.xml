@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.violentlymild.com/posts/deployment-contracts/</loc>
-    <lastmod>2015-11-10T00:00:00+00:00</lastmod>
+    <loc>https://www.violentlymild.com/posts/</loc>
+    <lastmod>2020-07-09T11:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.violentlymild.com/posts/</loc>
-    <lastmod>2015-11-10T00:00:00+00:00</lastmod>
+    <loc>https://www.violentlymild.com/posts/reverse-engineering-linear-congruential-generators/</loc>
+    <lastmod>2020-07-09T11:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.violentlymild.com/</loc>
+    <lastmod>2020-07-09T11:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.violentlymild.com/posts/deployment-contracts/</loc>
     <lastmod>2015-11-10T00:00:00+00:00</lastmod>
   </url>
   

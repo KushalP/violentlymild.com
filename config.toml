@@ -1,9 +1,10 @@
 baseurl = "https://www.violentlymild.com/"
-
 languageCode = "en-gb"
-
 title = "Violently Mild"
-
 theme = "violentlymild"
-
 publishDir = "docs"
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    tabWidth = 4

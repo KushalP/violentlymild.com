@@ -118,14 +118,14 @@ help ease moving a prototype into production.</p>
 described how it did a number of things automatically for a team. A
 fuller example could create a structured text file describing the
 application, a deployment contract. So what would this file look like?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;language&#34;</span>: <span style="color:#e6db74">&#34;clojure&#34;</span>,
-  <span style="color:#f92672">&#34;script&#34;</span>: [<span style="color:#e6db74">&#34;lein test&#34;</span>],
-  <span style="color:#f92672">&#34;dependencies&#34;</span>: [
-    {<span style="color:#f92672">&#34;service&#34;</span>: <span style="color:#e6db74">&#34;postgresql&#34;</span>},
-    {<span style="color:#f92672">&#34;service&#34;</span>: <span style="color:#e6db74">&#34;authentication&#34;</span>}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#000080">&#34;language&#34;</span>: <span style="color:#d14">&#34;clojure&#34;</span>,
+  <span style="color:#000080">&#34;script&#34;</span>: [<span style="color:#d14">&#34;lein test&#34;</span>],
+  <span style="color:#000080">&#34;dependencies&#34;</span>: [
+    {<span style="color:#000080">&#34;service&#34;</span>: <span style="color:#d14">&#34;postgresql&#34;</span>},
+    {<span style="color:#000080">&#34;service&#34;</span>: <span style="color:#d14">&#34;authentication&#34;</span>}
   ],
-  <span style="color:#f92672">&#34;healthcheck&#34;</span>: <span style="color:#e6db74">&#34;/healthcheck&#34;</span>
+  <span style="color:#000080">&#34;healthcheck&#34;</span>: <span style="color:#d14">&#34;/healthcheck&#34;</span>
 }
 </code></pre></div><p>This JSON file would provide the deployment contract that an
 application makes with the environment that it’s going to run
@@ -139,21 +139,21 @@ useful because rather than monitoring endpoints existing in config
 management code it can registered (and updated) upon deploying a
 service into an environment.</p>
 <p>The updated manifest file would look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;language&#34;</span>: <span style="color:#e6db74">&#34;clojure&#34;</span>,
-  <span style="color:#f92672">&#34;script&#34;</span>: [<span style="color:#e6db74">&#34;lein test&#34;</span>],
-  <span style="color:#f92672">&#34;dependencies&#34;</span>: [
-    {<span style="color:#f92672">&#34;service&#34;</span>: <span style="color:#e6db74">&#34;postgresql&#34;</span>},
-    {<span style="color:#f92672">&#34;service&#34;</span>: <span style="color:#e6db74">&#34;authentication&#34;</span>}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#000080">&#34;language&#34;</span>: <span style="color:#d14">&#34;clojure&#34;</span>,
+  <span style="color:#000080">&#34;script&#34;</span>: [<span style="color:#d14">&#34;lein test&#34;</span>],
+  <span style="color:#000080">&#34;dependencies&#34;</span>: [
+    {<span style="color:#000080">&#34;service&#34;</span>: <span style="color:#d14">&#34;postgresql&#34;</span>},
+    {<span style="color:#000080">&#34;service&#34;</span>: <span style="color:#d14">&#34;authentication&#34;</span>}
   ],
-  <span style="color:#f92672">&#34;healthcheck&#34;</span>: <span style="color:#e6db74">&#34;/healthcheck&#34;</span>,
-  <span style="color:#f92672">&#34;monitoring&#34;</span>: [
+  <span style="color:#000080">&#34;healthcheck&#34;</span>: <span style="color:#d14">&#34;/healthcheck&#34;</span>,
+  <span style="color:#000080">&#34;monitoring&#34;</span>: [
     {
-      <span style="color:#f92672">&#34;endpoint&#34;</span>: <span style="color:#e6db74">&#34;/user/*&#34;</span>,
-      <span style="color:#f92672">&#34;percentiles&#34;</span>: {
-        <span style="color:#f92672">&#34;90th&#34;</span>: <span style="color:#e6db74">&#34;X&#34;</span>,
-        <span style="color:#f92672">&#34;95th&#34;</span>: <span style="color:#e6db74">&#34;Y&#34;</span>,
-        <span style="color:#f92672">&#34;99th&#34;</span>: <span style="color:#e6db74">&#34;Z&#34;</span>
+      <span style="color:#000080">&#34;endpoint&#34;</span>: <span style="color:#d14">&#34;/user/*&#34;</span>,
+      <span style="color:#000080">&#34;percentiles&#34;</span>: {
+        <span style="color:#000080">&#34;90th&#34;</span>: <span style="color:#d14">&#34;X&#34;</span>,
+        <span style="color:#000080">&#34;95th&#34;</span>: <span style="color:#d14">&#34;Y&#34;</span>,
+        <span style="color:#000080">&#34;99th&#34;</span>: <span style="color:#d14">&#34;Z&#34;</span>
       }
     }
   ]
@@ -167,29 +167,29 @@ pre-production environments.</p>
 <p>The other step required to get into product is having a list of
 members of the team that are on-call for the application. The updated
 manifest would look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;language&#34;</span>: <span style="color:#e6db74">&#34;clojure&#34;</span>,
-  <span style="color:#f92672">&#34;script&#34;</span>: [<span style="color:#e6db74">&#34;lein test&#34;</span>],
-  <span style="color:#f92672">&#34;dependencies&#34;</span>: [
-    {<span style="color:#f92672">&#34;service&#34;</span>: <span style="color:#e6db74">&#34;postgresql&#34;</span>},
-    {<span style="color:#f92672">&#34;service&#34;</span>: <span style="color:#e6db74">&#34;authentication&#34;</span>}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#000080">&#34;language&#34;</span>: <span style="color:#d14">&#34;clojure&#34;</span>,
+  <span style="color:#000080">&#34;script&#34;</span>: [<span style="color:#d14">&#34;lein test&#34;</span>],
+  <span style="color:#000080">&#34;dependencies&#34;</span>: [
+    {<span style="color:#000080">&#34;service&#34;</span>: <span style="color:#d14">&#34;postgresql&#34;</span>},
+    {<span style="color:#000080">&#34;service&#34;</span>: <span style="color:#d14">&#34;authentication&#34;</span>}
   ],
-  <span style="color:#f92672">&#34;healthcheck&#34;</span>: <span style="color:#e6db74">&#34;/healthcheck&#34;</span>,
-  <span style="color:#f92672">&#34;monitoring&#34;</span>: [
+  <span style="color:#000080">&#34;healthcheck&#34;</span>: <span style="color:#d14">&#34;/healthcheck&#34;</span>,
+  <span style="color:#000080">&#34;monitoring&#34;</span>: [
     {
-      <span style="color:#f92672">&#34;endpoint&#34;</span>: <span style="color:#e6db74">&#34;/user/*&#34;</span>,
-      <span style="color:#f92672">&#34;percentiles&#34;</span>: {
-        <span style="color:#f92672">&#34;90th&#34;</span>: <span style="color:#e6db74">&#34;X&#34;</span>,
-        <span style="color:#f92672">&#34;95th&#34;</span>: <span style="color:#e6db74">&#34;Y&#34;</span>,
-        <span style="color:#f92672">&#34;99th&#34;</span>: <span style="color:#e6db74">&#34;Z&#34;</span>
+      <span style="color:#000080">&#34;endpoint&#34;</span>: <span style="color:#d14">&#34;/user/*&#34;</span>,
+      <span style="color:#000080">&#34;percentiles&#34;</span>: {
+        <span style="color:#000080">&#34;90th&#34;</span>: <span style="color:#d14">&#34;X&#34;</span>,
+        <span style="color:#000080">&#34;95th&#34;</span>: <span style="color:#d14">&#34;Y&#34;</span>,
+        <span style="color:#000080">&#34;99th&#34;</span>: <span style="color:#d14">&#34;Z&#34;</span>
       }
     }
   ],
-  <span style="color:#f92672">&#34;team&#34;</span>: {
-    <span style="color:#f92672">&#34;oncall&#34;</span>: [
+  <span style="color:#000080">&#34;team&#34;</span>: {
+    <span style="color:#000080">&#34;oncall&#34;</span>: [
       {
-        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Kushal Pisavadia&#34;</span>,
-        <span style="color:#f92672">&#34;tel&#34;</span>: <span style="color:#e6db74">&#34;+447700000000&#34;</span>
+        <span style="color:#000080">&#34;name&#34;</span>: <span style="color:#d14">&#34;Kushal Pisavadia&#34;</span>,
+        <span style="color:#000080">&#34;tel&#34;</span>: <span style="color:#d14">&#34;+447700000000&#34;</span>
       }
     ]
   }

@@ -1,5 +1,5 @@
 +++
-date = "2020-07-09T12:00:00Z"
+date = "2020-07-09T11:00:00Z"
 title = "Reverse engineering linear congruential generators"
 aliases = ["reverse-engineering-linear-congruential-generators"]
 +++
@@ -21,8 +21,9 @@ generator](https://en.wikipedia.org/wiki/Pseudorandom_number_generator)
 
 An example of this is Java's java.util.Random:
 
-```
-
+```java
+Random random = new Random();
+System.out.format("random integer = %d\n", random.nextInt());
 ```
 
 One of the most widely used PRNGs is a [linear congruential
@@ -50,7 +51,7 @@ s(n+1) = a * s(n) + b mod m
 
 Here’s an implementation in Rust:
 
-```
+```rust
 #[derive(Clone, Copy, Debug)]
 struct LinearCongruentialGenerator {
     state: i128,
@@ -123,8 +124,9 @@ we can model them next to each other:
 // Can be rewritten as:
 increment = (49620 - 1 * multiplier) % modulus
 increment = (49620 - 1 *       6329) % 4294967301
+```
 
-// In rust:
+```rust
 fn find_unknown_increment(states: &[i128], multiplier: i128, modulus: i128) -> (i128, i128, i128) {
     let increment = (states[1] - states[0] * multiplier) % modulus;
     (multiplier, increment, modulus)
@@ -134,7 +136,7 @@ fn find_unknown_increment(states: &[i128], multiplier: i128, modulus: i128) -> (
 Passing in the output state above, the multiplier, and modulus we will
 receive the following tuple:
 
-```
+```rust
 find_unknown_increment(&states, lgc.multiplier, lgc.modulus)
 => (6329, 43291, 4294967301)
 ```
@@ -158,8 +160,9 @@ these linear equations into another form to get our multiplier:
 s2 - s1 = s1 * multiplier - s0 * multiplier % modulus
 s2 - s1 = multiplier * (s1 - s0) % modulus
 multiplier = (s2 - s1) / (s1 - s0) % modulus
+```
 
-/// In rust:
+```rust
 /// Implementation of the extended Euclidean algorithm
 fn egcd(a: i128, b: i128) -> (i128, i128, i128) {
     if a == 0 {
@@ -189,7 +192,7 @@ fn find_unknown_multiplier(states: &[i128], modulus: i128) -> (i128, i128, i128)
 Passing in our states and modulus, we receive the following tuple as
 expected:
 
-```
+```rust
 find_unknown_multiplier(&states, lgc.modulus)
 => (6329, 43291, 4294967301)
 ```
@@ -208,7 +211,7 @@ In mathematics, if you have a set of random multiples of N there is a
 large probability that their greatest common divisor will be equal to
 N. Here is some code as an example:
 
-```
+```rust
 fn gcd(a: i128, b: i128) -> i128 {
     if b == 0 {
         a.abs()
@@ -256,7 +259,7 @@ m = gcd(u0, u1, u2, ...)
 Using this method we can now find the modulus of our LCG and find out
 the multiplier and the increment.
 
-```
+```rust
 fn find_unknown_params(states: &[i128]) -> (i128, i128, i128) {
     let offset_states = &states[1..];
     // Zip together the state lists, adjusted by one position.
@@ -308,7 +311,7 @@ similar pattern by iterating through the seeds. For example, here is
 how we could reproduce the LCG configuration commonly used in
 java.util.Random, POSIX rand48, and glibc rand48:
 
-```
+```rust
 let lgc = LinearCongruentialGenerator {
     state: // Left as a search exercise for the reader.
     multiplier: 25214903917,
