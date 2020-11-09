@@ -1,0 +1,10 @@
+name = "Violently Mild V2"
+license = "MIT"
+licenselink = "https://github.com/KushalP/violentlymild.com/blob/master/themes/violentlymild-v2/LICENSE.md"
+description = "The second iteration of the theme of my personal website"
+homepage = "https://violentlymild.com/"
+min_version = 0.15
+
+[author]
+  name = "Kushal Pisavadia"
+  homepage = "https://violentlymild.com/"
