@@ -1,7 +1,7 @@
 baseurl = "https://www.violentlymild.com/"
 languageCode = "en-gb"
 title = "Violently Mild"
-theme = "violentlymild-v2"
+theme = "violentlymild"
 publishDir = "docs"
 
 [markup]
