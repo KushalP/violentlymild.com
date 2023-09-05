@@ -10,8 +10,7 @@ gained in such a short period of time. This became even more evident
 when showing results to the clients (designer team) who were
 over-confident in their ability to produce easy to use products.
 
-I feel the process of usability testing can be summed up in these <del
-datetime="2010-01-28T14:46:56+00:00">four</del> five steps:
+I feel the process of usability testing can be summed up in these five steps:
 
 1.  Watch someone use your product
 2.  Take note of any issues they have

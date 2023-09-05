@@ -1,97 +1,59 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://www.violentlymild.com/posts/</loc>
     <lastmod>2020-07-09T11:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/reverse-engineering-linear-congruential-generators/</loc>
     <lastmod>2020-07-09T11:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/</loc>
     <lastmod>2020-07-09T11:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/deployment-contracts/</loc>
     <lastmod>2015-11-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/on-performance-reviews/</loc>
     <lastmod>2015-04-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/what-will-happen-in-the-next-year/</loc>
     <lastmod>2015-03-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/solving-problems-with-dependency-management-in-go/</loc>
     <lastmod>2015-02-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/running-a-game-day-for-gov-uk/</loc>
     <lastmod>2015-02-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/using-go-in-government/</loc>
     <lastmod>2014-11-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/taking-another-look-at-gov-uks-disaster-recovery/</loc>
     <lastmod>2014-08-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/just-a-few-more-tweaks/</loc>
     <lastmod>2010-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/can-you-teach-me-how-to-make-computer-games/</loc>
     <lastmod>2010-02-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/why-you-should-do-usability-testing/</loc>
     <lastmod>2010-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/working-to-constraints/</loc>
     <lastmod>2010-01-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/removable-storage-is-just-for-the-spec-sheets/</loc>
     <lastmod>2010-01-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/posts/designing-an-interface-to-create-interfaces/</loc>
     <lastmod>2010-01-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/tags/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.violentlymild.com/talks/</loc>
   </url>
-  
 </urlset>

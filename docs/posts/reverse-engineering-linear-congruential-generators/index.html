@@ -46,9 +46,9 @@ number, so many developers over the years have opted to use a
 generator</a>
 (PRNG) instead.</p>
 <p>An example of this is Java&rsquo;s java.util.Random:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Random random <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Random<span style="color:#000;font-weight:bold">();</span>
-System<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">out</span><span style="color:#000;font-weight:bold">.</span><span style="color:#008080">println</span><span style="color:#000;font-weight:bold">(</span>random<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">nextInt</span><span style="color:#000;font-weight:bold">());</span>
-</code></pre></div><p>One of the most widely used PRNGs is a <a href="https://en.wikipedia.org/wiki/Linear_congruential_generator">linear congruential
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Random random <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Random<span style="color:#000;font-weight:bold">();</span>
+</span></span><span style="display:flex;"><span>System<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">out</span><span style="color:#000;font-weight:bold">.</span><span style="color:#008080">println</span><span style="color:#000;font-weight:bold">(</span>random<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">nextInt</span><span style="color:#000;font-weight:bold">());</span>
+</span></span></code></pre></div><p>One of the most widely used PRNGs is a <a href="https://en.wikipedia.org/wiki/Linear_congruential_generator">linear congruential
 generator</a>. Due
 to their <em>linear</em> nature however if you observe enough of numbers
 generated you can work out how the numbers are produced.</p>
@@ -58,51 +58,51 @@ sequence of pseudorandom numbers. It’s one of the oldest algorithms,
 easy to implement, and fast. It could be used when generating some
 initial values in the process of creating a salt, nonce, or key.</p>
 <p>The algorithm for the LCG can be described as follows:</p>
-<pre><code>s(n+1) = a * s(n) + b mod m
+<pre tabindex="0"><code>s(n+1) = a * s(n) + b mod m
 
 // s(n) is the state
 // a is the multiplier
 // b is the increment
 // m is the modulus
 </code></pre><p>Here’s an implementation in Rust:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#999;font-weight:bold;font-style:italic">#[derive(Clone, Copy, Debug)]</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">LinearCongruentialGenerator</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>state: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>multiplier: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>increment: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>modulus: <span style="color:#458;font-weight:bold">i128</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span><span style="color:#0086b3">Iterator</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>LinearCongruentialGenerator<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">type</span> <span style="color:#458;font-weight:bold">Item</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>i128;<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">next</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;</span>i128<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Using these variables to mimic the equation.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.state<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.multiplier<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.increment<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>m<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.modulus<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>next_state<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>(a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>b)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>m;<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#999">self</span>.state<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>next_state;<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#0086b3">Some</span>(next_state)<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>lgc<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>LinearCongruentialGenerator<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>state: <span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// Our seed value when we begin.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>multiplier: <span style="color:#099">6329</span>,<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>increment: <span style="color:#099">43291</span>,<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Picking this value because it&#39;s a prime number.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>modulus: <span style="color:#099">4294967301</span>,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// 2**32 + 5
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>};<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>states: <span style="color:#0086b3">Vec</span><span style="color:#000;font-weight:bold">&lt;</span>i128<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>lgc.take(<span style="color:#099">10</span>).collect();<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;states: {:?}&#34;</span>,<span style="color:#bbb"> </span>states);<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span></code></pre></div><p>If you were to compile and run this it would produce the following output:</p>
-<pre><code>states: [49620, 314088271, 3589817388, 3872236954, 304305651, 1805157622, 229612269, 1517146054, 2765501322, 866158654]
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#[derive(Clone, Copy, Debug)]</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">LinearCongruentialGenerator</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>state: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>multiplier: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>increment: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>modulus: <span style="color:#458;font-weight:bold">i128</span>
+</span></span><span style="display:flex;"><span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span><span style="color:#0086b3">Iterator</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>LinearCongruentialGenerator<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">type</span> <span style="color:#458;font-weight:bold">Item</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i128</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">next</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i128</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Using these variables to mimic the equation.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.state<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.multiplier<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.increment<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>m<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.modulus<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>next_state<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>(a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>b)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>m;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#999">self</span>.state<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>next_state;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#0086b3">Some</span>(next_state)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>lgc<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>LinearCongruentialGenerator<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>state: <span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// Our seed value when we begin.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>multiplier: <span style="color:#099">6329</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>increment: <span style="color:#099">43291</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Picking this value because it&#39;s a prime number.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>modulus: <span style="color:#099">4294967301</span>,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// 2**32 + 5
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>};<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>states: <span style="color:#0086b3">Vec</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i128</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>lgc.take(<span style="color:#099">10</span>).collect();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>println!(<span style="color:#d14">&#34;states: </span><span style="color:#d14">{:?}</span><span style="color:#d14">&#34;</span>,<span style="color:#bbb"> </span>states);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div><p>If you were to compile and run this it would produce the following output:</p>
+<pre tabindex="0"><code>states: [49620, 314088271, 3589817388, 3872236954, 304305651, 1805157622, 229612269, 1517146054, 2765501322, 866158654]
 </code></pre><p>Given that the seeded state value, multiplier, increment, and modulus
 value are all stated here, we can create another LCG and it will
 always produce the above output.</p>
@@ -124,77 +124,77 @@ increment.</p>
 <p>We can work out the increment parameter for an LCG using a simple
 linear equation approach. When we have the modulus and the multiplier
 we can model them next to each other:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#998;font-style:italic">// 49620     = (1 * multiplier + increment) % modulus
-</span><span style="color:#998;font-style:italic">// Can be rewritten as:
-</span><span style="color:#998;font-style:italic">// increment = (49620 - 1 * multiplier) % modulus
-</span><span style="color:#998;font-style:italic">// increment = (49620 - 1 *       6329) % 4294967301
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">find_unknown_increment</span>(<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>states: <span style="color:#000;font-weight:bold">&amp;</span>[i128],<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>multiplier: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>modulus: <span style="color:#458;font-weight:bold">i128</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>)<span style="color:#bbb"> </span>-&gt; (i128,<span style="color:#bbb"> </span>i128,<span style="color:#bbb"> </span>i128)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>increment<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
-</span><span style="color:#bbb">        </span>(states[<span style="color:#099">1</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">0</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>multiplier)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>modulus;<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>(multiplier,<span style="color:#bbb"> </span>increment,<span style="color:#bbb"> </span>modulus)<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span></code></pre></div><p>Passing in the output state above, the multiplier, and modulus we will
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// 49620     = (1 * multiplier + increment) % modulus
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Can be rewritten as:
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// increment = (49620 - 1 * multiplier) % modulus
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// increment = (49620 - 1 *       6329) % 4294967301
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">find_unknown_increment</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>states: <span style="color:#000;font-weight:bold">&amp;</span>[<span style="color:#458;font-weight:bold">i128</span>],<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>multiplier: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>modulus: <span style="color:#458;font-weight:bold">i128</span>
+</span></span><span style="display:flex;"><span>)<span style="color:#bbb"> </span>-&gt; (<span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>increment<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>(states[<span style="color:#099">1</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">0</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>multiplier)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>modulus;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>(multiplier,<span style="color:#bbb"> </span>increment,<span style="color:#bbb"> </span>modulus)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div><p>Passing in the output state above, the multiplier, and modulus we will
 receive the following tuple:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">find_unknown_increment(<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">&amp;</span>states,<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>lgc.multiplier,<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>lgc.modulus<span style="color:#bbb">
-</span><span style="color:#bbb"></span>)<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#099">6329</span>,<span style="color:#bbb"> </span><span style="color:#099">43291</span>,<span style="color:#bbb"> </span><span style="color:#099">4294967301</span>)<span style="color:#bbb">
-</span></code></pre></div><h2 id="an-unknown-increment-and-multiplier">An unknown increment and multiplier</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>find_unknown_increment(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">&amp;</span>states,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>lgc.multiplier,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>lgc.modulus<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#099">6329</span>,<span style="color:#bbb"> </span><span style="color:#099">43291</span>,<span style="color:#bbb"> </span><span style="color:#099">4294967301</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="an-unknown-increment-and-multiplier">An unknown increment and multiplier</h2>
 <p>Let’s make things a little difficult now and assume that we don’t know
 the increment or the multiplier, and only know the modulus. We know
 that our LCG generates numbers using the following linear equation:</p>
-<pre><code>s0 = (seed * multiplier + increment) % modulus
+<pre tabindex="0"><code>s0 = (seed * multiplier + increment) % modulus
 s1 = (s0   * multiplier + increment) % modulus
 s2 = (s1   * multiplier + increment) % modulus
 </code></pre><p>If we have any three linear values produced by our LCG we can rewrite
 these linear equations into another form to get our multiplier:</p>
-<pre><code>s2 - s1 = s1 * multiplier - s0 * multiplier % modulus
+<pre tabindex="0"><code>s2 - s1 = s1 * multiplier - s0 * multiplier % modulus
 s2 - s1 = multiplier * (s1 - s0) % modulus
 multiplier = (s2 - s1) / (s1 - s0) % modulus
 </code></pre><p>In rust:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#d14">/// Implementation of the extended Euclidean algorithm
-</span><span style="color:#d14"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">egcd</span>(a: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span>b: <span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>-&gt; (i128,<span style="color:#bbb"> </span>i128,<span style="color:#bbb"> </span>i128)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">==</span><span style="color:#bbb"> </span><span style="color:#099">0</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>(b,<span style="color:#bbb"> </span><span style="color:#099">0</span>,<span style="color:#bbb"> </span><span style="color:#099">1</span>)<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>(g,<span style="color:#bbb"> </span>y,<span style="color:#bbb"> </span>x)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>egcd(b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>a,<span style="color:#bbb"> </span>a);<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>(g,<span style="color:#bbb"> </span>x<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>(b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">/</span><span style="color:#bbb"> </span>a)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>y,<span style="color:#bbb"> </span>y)<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">mod_inverse</span>(a: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span>m: <span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Result</span><span style="color:#000;font-weight:bold">&lt;</span>i128,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>(g,<span style="color:#bbb"> </span>x,<span style="color:#bbb"> </span>_)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>egcd(a,<span style="color:#bbb"> </span>m);<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>g<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">!=</span><span style="color:#bbb"> </span><span style="color:#099">1</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#0086b3">Err</span>(<span style="color:#d14">&#34;mod inverse does not exist for 1&#34;</span>)<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#0086b3">Ok</span>(x<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>m)<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">find_unknown_multiplier</span>(<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>states: <span style="color:#000;font-weight:bold">&amp;</span>[i128],<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>modulus: <span style="color:#458;font-weight:bold">i128</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>)<span style="color:#bbb"> </span>-&gt; (i128,<span style="color:#bbb"> </span>i128,<span style="color:#bbb"> </span>i128)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>inverse_modulus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
-</span><span style="color:#bbb">        </span>mod_inverse(states[<span style="color:#099">1</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">0</span>],<span style="color:#bbb"> </span>modulus).unwrap()<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>multiplier<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
-</span><span style="color:#bbb">        </span>(states[<span style="color:#099">2</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">1</span>])<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>inverse_modulus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>modulus;<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span>find_unknown_increment(states,<span style="color:#bbb"> </span>multiplier,<span style="color:#bbb"> </span>modulus)<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span></code></pre></div><p>Passing in our states and modulus, we receive the following tuple as
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#d14">/// Implementation of the extended Euclidean algorithm
+</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">egcd</span>(a: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span>b: <span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>-&gt; (<span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">==</span><span style="color:#bbb"> </span><span style="color:#099">0</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>(b,<span style="color:#bbb"> </span><span style="color:#099">0</span>,<span style="color:#bbb"> </span><span style="color:#099">1</span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>(g,<span style="color:#bbb"> </span>y,<span style="color:#bbb"> </span>x)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>egcd(b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>a,<span style="color:#bbb"> </span>a);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>(g,<span style="color:#bbb"> </span>x<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>(b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">/</span><span style="color:#bbb"> </span>a)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>y,<span style="color:#bbb"> </span>y)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">mod_inverse</span>(a: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span>m: <span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Result</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>(g,<span style="color:#bbb"> </span>x,<span style="color:#bbb"> </span>_)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>egcd(a,<span style="color:#bbb"> </span>m);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>g<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">!=</span><span style="color:#bbb"> </span><span style="color:#099">1</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#0086b3">Err</span>(<span style="color:#d14">&#34;mod inverse does not exist for 1&#34;</span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#0086b3">Ok</span>(x<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>m)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">find_unknown_multiplier</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>states: <span style="color:#000;font-weight:bold">&amp;</span>[<span style="color:#458;font-weight:bold">i128</span>],<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>modulus: <span style="color:#458;font-weight:bold">i128</span>
+</span></span><span style="display:flex;"><span>)<span style="color:#bbb"> </span>-&gt; (<span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>inverse_modulus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>mod_inverse(states[<span style="color:#099">1</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">0</span>],<span style="color:#bbb"> </span>modulus).unwrap()<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>multiplier<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>(states[<span style="color:#099">2</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>states[<span style="color:#099">1</span>])<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>inverse_modulus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>modulus;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>find_unknown_increment(states,<span style="color:#bbb"> </span>multiplier,<span style="color:#bbb"> </span>modulus)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div><p>Passing in our states and modulus, we receive the following tuple as
 expected:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">find_unknown_multiplier(<span style="color:#000;font-weight:bold">&amp;</span>states,<span style="color:#bbb"> </span>lgc.modulus)<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#099">6329</span>,<span style="color:#bbb"> </span><span style="color:#099">43291</span>,<span style="color:#bbb"> </span><span style="color:#099">4294967301</span>)<span style="color:#bbb">
-</span></code></pre></div><h2 id="all-parameters-are-unknown">All parameters are unknown</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>find_unknown_multiplier(<span style="color:#000;font-weight:bold">&amp;</span>states,<span style="color:#bbb"> </span>lgc.modulus)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#099">6329</span>,<span style="color:#bbb"> </span><span style="color:#099">43291</span>,<span style="color:#bbb"> </span><span style="color:#099">4294967301</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="all-parameters-are-unknown">All parameters are unknown</h2>
 <p>Let’s really make it more realistic now and assume that all parameters
 are unknown. This is exactly the scenario that we were dealing with.</p>
 <p>We don’t know the modulus value so every equation we form will have
@@ -203,33 +203,33 @@ another unknown that we’ll have to deal with.</p>
 <p>In mathematics, if you have a set of random multiples of N there is a
 large probability that their greatest common divisor will be equal to
 N. Here is some code as an example:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">gcd</span>(a: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span>b: <span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">i128</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">==</span><span style="color:#bbb"> </span><span style="color:#099">0</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>a.abs()<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>gcd(b,<span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>b)<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>n: <span style="color:#458;font-weight:bold">i128</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">17</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>v<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>vec<span style="color:#000;font-weight:bold">!</span>[<span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#099">2</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>];<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>rng<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>rand::thread_rng();<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>random_numbers: <span style="color:#0086b3">Vec</span><span style="color:#000;font-weight:bold">&lt;</span>i128<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span>v.iter().map(<span style="color:#000;font-weight:bold">|</span>_<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb">
-</span><span style="color:#bbb">        </span>rng.gen::<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">u32</span><span style="color:#000;font-weight:bold">&gt;</span>()<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span>i128<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>n<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>).collect();<span style="color:#bbb">
-</span><span style="color:#bbb"></span>random_numbers.iter().fold(<span style="color:#099">0</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">|</span>a,<span style="color:#bbb"> </span>b<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>gcd(a,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span>b))<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span><span style="color:#099">17</span><span style="color:#bbb">
-</span></code></pre></div><p>This is useful because we can look at some modulus operations that
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">gcd</span>(a: <span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span>b: <span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">i128</span> {<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">==</span><span style="color:#bbb"> </span><span style="color:#099">0</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>a.abs()<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>gcd(b,<span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span>b)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>n: <span style="color:#458;font-weight:bold">i128</span> <span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">17</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>v<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>vec![<span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#099">2</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>];<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>rng<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>rand::thread_rng();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>random_numbers: <span style="color:#0086b3">Vec</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i128</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>v.iter().map(<span style="color:#000;font-weight:bold">|</span>_<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>rng.gen::<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">u32</span><span style="color:#000;font-weight:bold">&gt;</span>()<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i128</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>n<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>).collect();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>random_numbers.iter().fold(<span style="color:#099">0</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">|</span>a,<span style="color:#bbb"> </span>b<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>gcd(a,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span>b))<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span><span style="color:#099">17</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>This is useful because we can look at some modulus operations that
 correspond to zero then we can use that as a basis to build our linear
 equations from.</p>
-<pre><code>x = 0 mod n
+<pre tabindex="0"><code>x = 0 mod n
 x = k * n
 </code></pre><p>The above is only useful to us if x is not equal to zero, which we
 expect to be the case as we’re working with PRNGs. Given this, we can
 take the greatest common divisor from these values and recover n.</p>
 <p>Here is how this would be modelled:</p>
-<pre><code>// Calculate the difference of the states
+<pre tabindex="0"><code>// Calculate the difference of the states
 t0 = s1 - s0
 t1 = s2 - s1 = (s1 * m + c) - (s0 * m + c)
 t2 = s3 - s2 = (s2 * m + c) - (s1 * m + c)
@@ -247,30 +247,29 @@ u0 = (m * m * t0 * t0) - (m * t0 * m * t0)
 
 // Find the greatest common divisor of the differences
 m = gcd(u0, u1, u2, ...)
-
 </code></pre><p>Using this method we can now find the modulus of our LCG and find out
 the multiplier and the increment.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">find_unknown_params</span>(states: <span style="color:#000;font-weight:bold">&amp;</span>[i128])<span style="color:#bbb"> </span>-&gt; (i128,<span style="color:#bbb"> </span>i128,<span style="color:#bbb"> </span>i128)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>offset_states<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span>states[<span style="color:#099">1</span>..];<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Zip together the state lists, adjusted by one position.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>zipped_states<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>states.iter().zip(offset_states.iter());<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Calculate the difference of the states.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>diffs: <span style="color:#0086b3">Vec</span><span style="color:#000;font-weight:bold">&lt;</span>i128<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
-</span><span style="color:#bbb">        </span>zipped_states.map(<span style="color:#000;font-weight:bold">|</span>(k0,<span style="color:#bbb"> </span>k1)<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>k1<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>k0).collect();<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Build the matrix of the differences
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>offset_diffs_1<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>diffs.iter().skip(<span style="color:#099">1</span>);<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>offset_diffs_2<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>diffs.iter().skip(<span style="color:#099">2</span>);<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>zipped_diffs<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
-</span><span style="color:#bbb">        </span>diffs.iter().zip(offset_diffs_1).zip(offset_diffs_2);<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>zeroes<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>zipped_diffs.map(<span style="color:#000;font-weight:bold">|</span>((s0,<span style="color:#bbb"> </span>s1),<span style="color:#bbb"> </span>s2)<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>s2<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>s0<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>s1<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>s1);<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Find the greatest common divisor of the differences
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>modulus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>zeroes.fold(<span style="color:#099">0</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">|</span>a,<span style="color:#bbb"> </span>b<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>gcd(a,<span style="color:#bbb"> </span>b));<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>find_unknown_multiplier(states,<span style="color:#bbb"> </span>modulus)<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>find_unknown_params(<span style="color:#000;font-weight:bold">&amp;</span>states)<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#099">6329</span>,<span style="color:#bbb"> </span><span style="color:#099">43291</span>,<span style="color:#bbb"> </span><span style="color:#099">4294967301</span>)<span style="color:#bbb">
-</span></code></pre></div><h3 id="what-weve-done">What we&rsquo;ve done</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">find_unknown_params</span>(states: <span style="color:#000;font-weight:bold">&amp;</span>[<span style="color:#458;font-weight:bold">i128</span>])<span style="color:#bbb"> </span>-&gt; (<span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i128</span>,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i128</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>offset_states<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span>states[<span style="color:#099">1</span><span style="color:#000;font-weight:bold">..</span>];<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Zip together the state lists, adjusted by one position.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>zipped_states<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>states.iter().zip(offset_states.iter());<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Calculate the difference of the states.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>diffs: <span style="color:#0086b3">Vec</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i128</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>zipped_states.map(<span style="color:#000;font-weight:bold">|</span>(k0,<span style="color:#bbb"> </span>k1)<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>k1<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>k0).collect();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Build the matrix of the differences
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>offset_diffs_1<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>diffs.iter().skip(<span style="color:#099">1</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>offset_diffs_2<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>diffs.iter().skip(<span style="color:#099">2</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>zipped_diffs<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>diffs.iter().zip(offset_diffs_1).zip(offset_diffs_2);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>zeroes<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>zipped_diffs.map(<span style="color:#000;font-weight:bold">|</span>((s0,<span style="color:#bbb"> </span>s1),<span style="color:#bbb"> </span>s2)<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>s2<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>s0<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>s1<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>s1);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Find the greatest common divisor of the differences
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>modulus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>zeroes.fold(<span style="color:#099">0</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">|</span>a,<span style="color:#bbb"> </span>b<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>gcd(a,<span style="color:#bbb"> </span>b));<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>find_unknown_multiplier(states,<span style="color:#bbb"> </span>modulus)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>find_unknown_params(<span style="color:#000;font-weight:bold">&amp;</span>states)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#099">6329</span>,<span style="color:#bbb"> </span><span style="color:#099">43291</span>,<span style="color:#bbb"> </span><span style="color:#099">4294967301</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><h3 id="what-weve-done">What we&rsquo;ve done</h3>
 <p>With this method we have just reverse engineered an LCG, without brute
 forcing and with close to zero knowledge. We have done this by
 observing its output.</p>
@@ -295,13 +294,13 @@ can be found on
 similar pattern by iterating through the seeds. For example, here is
 how we could reproduce the LCG configuration commonly used in
 java.util.Random, POSIX rand48, and glibc rand48:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>lgc<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>LinearCongruentialGenerator<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>state: <span style="color:#998;font-style:italic">// Left as a search exercise for the reader.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>multiplier: <span style="color:#099">25214903917</span>,<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>increment: <span style="color:#099">11</span>,<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>modulus: <span style="color:#099">2.</span>pow(<span style="color:#099">48</span>)<span style="color:#bbb">
-</span><span style="color:#bbb"></span>};<span style="color:#bbb">
-</span></code></pre></div><h2 id="references">References</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>lgc<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>LinearCongruentialGenerator<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>state: <span style="color:#998;font-style:italic">// Left as a search exercise for the reader.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>multiplier: <span style="color:#099">25214903917</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>increment: <span style="color:#099">11</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>modulus: <span style="color:#099">2.</span>pow(<span style="color:#099">48</span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>};<span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="references">References</h2>
 <p>A lot of what I’ve covered in this blog has been learnt from George
 Marsaglia’s paper <a href="https://www.pnas.org/content/61/1/25">Random numbers fall mainly in the
 planes</a>. In that paper he
@@ -309,7 +308,7 @@ explains how he found the flaw that LCGs are mainly &ldquo;falling into the
 planes&rdquo;. This is where any three consecutive integers with a common
 multiplier fall on the lattice of points generated by all linear
 combinations of the three points:</p>
-<pre><code>(1, a, a*a)
+<pre tabindex="0"><code>(1, a, a*a)
 (0, m, 0)
 (0, 0, m)
 </code></pre><p>He goes on to state that any point falls on the lattice generated by (1, a), (0, m).</p>
@@ -319,7 +318,7 @@ combinations of the three points:</p>
     </main>
 
     <footer>
-      <p>&copy; 2008-2020 Kushal Pisavadia</p>
+      <p>&copy; 2008-2023 Kushal Pisavadia</p>
     </footer>
   </body>
 </html>

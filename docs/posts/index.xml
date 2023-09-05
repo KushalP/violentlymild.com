@@ -6,11 +6,7 @@
     <description>Recent content in Posts on Violently Mild</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 09 Jul 2020 11:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.violentlymild.com/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 09 Jul 2020 11:00:00 +0000</lastBuildDate><atom:link href="https://www.violentlymild.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reverse engineering linear congruential generators</title>
       <link>https://www.violentlymild.com/posts/reverse-engineering-linear-congruential-generators/</link>
@@ -119,7 +115,7 @@ Solving usability problems In a previous post I explained why you should do usab
       
       <guid>https://www.violentlymild.com/posts/why-you-should-do-usability-testing/</guid>
       <description>I recently completed my first usability test and while it wasn’t very rigorous, it definitely opened up my eyes to how much feedback can be gained in such a short period of time. This became even more evident when showing results to the clients (designer team) who were over-confident in their ability to produce easy to use products.
-I feel the process of usability testing can be summed up in these fourfive steps:</description>
+I feel the process of usability testing can be summed up in these five steps:</description>
     </item>
     
     <item>
@@ -128,7 +124,7 @@ I feel the process of usability testing can be summed up in these fourfive steps
       <pubDate>Fri, 22 Jan 2010 00:00:00 +0000</pubDate>
       
       <guid>https://www.violentlymild.com/posts/working-to-constraints/</guid>
-      <description>I’ve been reading the 37signals SVN blog for a while now, but a recent talk by DHHreally got me thinking. In it he speaks to a group of Stanford students and explains why they need to Unlearn their MBA. In this post I take some of the topics that he discusses and throw in my own opinion.
+      <description>I’ve been reading the 37signals SVN blog for a while now, but a recent talk by DHH really got me thinking. In it he speaks to a group of Stanford students and explains why they need to Unlearn their MBA. In this post I take some of the topics that he discusses and throw in my own opinion.
 As a side note: It’s interesting to consider how many people’s professional lives have been shaped by the software framework that DHH released to the world.</description>
     </item>
     
@@ -148,7 +144,7 @@ As a side note: It’s interesting to consider how many people’s professional 
       
       <guid>https://www.violentlymild.com/posts/designing-an-interface-to-create-interfaces/</guid>
       <description>I’ve been reading Coders at Work recently and this blog post is spawned from a point made by Simon Peyton Jones in the book — Page 252, Paragraph 3 — about creating usable programming languages.
-When the field of HCIwas established in the early 1980s, learnability was the research focus. By the late 1980s we had a handle on how to design for the novice user, demonstrating that even the best commercially available personal computer was much harder to learn than claimed by it’s manufacturer.</description>
+When the field of HCI was established in the early 1980s, learnability was the research focus. By the late 1980s we had a handle on how to design for the novice user, demonstrating that even the best commercially available personal computer was much harder to learn than claimed by it’s manufacturer.</description>
     </item>
     
   </channel>
