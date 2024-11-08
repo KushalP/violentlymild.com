@@ -2,4 +2,4 @@ clean:
 	rm -rf public
 
 build:
-	hugo -v
+	hugo --logLevel info
