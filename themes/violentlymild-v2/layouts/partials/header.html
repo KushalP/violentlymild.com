@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600&display=swap">
 
   <link rel="canonical" href="{{ .Permalink }}">
-  <link href="{{ .Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
+  <link href="{{ with .OutputFormats.Get "rss" -}}{{ .Permalink }}{{ end }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
 
   <link rel="home" href="/" title="Home page">
 </head>
