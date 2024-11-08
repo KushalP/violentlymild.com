@@ -4,158 +4,114 @@
     <title>Violently Mild</title>
     <link>https://www.violentlymild.com/</link>
     <description>Recent content on Violently Mild</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 09 Jul 2020 11:00:00 +0000</lastBuildDate><atom:link href="https://www.violentlymild.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Jul 2020 11:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.violentlymild.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reverse engineering linear congruential generators</title>
       <link>https://www.violentlymild.com/posts/reverse-engineering-linear-congruential-generators/</link>
       <pubDate>Thu, 09 Jul 2020 11:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/reverse-engineering-linear-congruential-generators/</guid>
-      <description>Last year I helped a friend as they tried to reverse engineer a piece of software and this blog post contains some rough notes on what we did at a specific step
-Producing random numbers When doing common cryptographic operations it’s important to be able to produce a random number. The goal is to produce a number or a set of numbers, such that there is no way to reliably predict how that number was generated.</description>
+      <description>&lt;p&gt;&lt;em&gt;Last year I helped a friend as they tried to reverse engineer a piece&#xA;of software and this blog post contains some rough notes on what we&#xA;did at a specific step&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;producing-random-numbers&#34;&gt;Producing random numbers&lt;/h2&gt;&#xA;&lt;p&gt;When doing common cryptographic operations it’s important to be able&#xA;to produce a random number. The goal is to produce a number or a set&#xA;of numbers, such that there is no way to reliably predict how that&#xA;number was generated. However it can be expensive to produce a random&#xA;number, so many developers over the years have opted to use a&#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/Pseudorandom_number_generator&#34;&gt;pseudorandom number&#xA;generator&lt;/a&gt;&#xA;(PRNG) instead.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Deployment Contracts</title>
       <link>https://www.violentlymild.com/posts/deployment-contracts/</link>
       <pubDate>Tue, 10 Nov 2015 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/deployment-contracts/</guid>
-      <description>I’ve been in a number of discussions recently around how to improve deployment workflows and how best to implement (and improve upon) 12-Factor applications in a continuous delivery environment. The following is a bunch of assumptions, desires, and implementations I have. It’s entirely aimed at what some organisations are calling their “platform team” and might not be applicable to all use-cases.
-Helping everyone do more For the majority of modern day platform teams their task is to understand the needs of the teams they support and to provide simpler processes for them to do what they need to do.</description>
+      <description>&lt;p&gt;I’ve been in a number of discussions recently around how to improve&#xA;deployment workflows and how best to implement (and improve upon)&#xA;&lt;a href=&#34;http://12factor.net/&#34;&gt;12-Factor applications&lt;/a&gt; in a continuous&#xA;delivery environment. The following is a bunch of assumptions,&#xA;desires, and implementations I have. It’s entirely aimed at what some&#xA;organisations are calling their “platform team” and might not be&#xA;applicable to all use-cases.&lt;/p&gt;&#xA;&lt;h2 id=&#34;helping-everyone-do-more&#34;&gt;Helping everyone do more&lt;/h2&gt;&#xA;&lt;p&gt;For the majority of modern day platform teams their task is to&#xA;understand the needs of the teams they support and to provide simpler&#xA;processes for them to do what they need to do. Specifically:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>On Performance Reviews</title>
       <link>https://www.violentlymild.com/posts/on-performance-reviews/</link>
       <pubDate>Fri, 03 Apr 2015 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/on-performance-reviews/</guid>
-      <description>This blog post is for my current and future colleagues, but I&amp;rsquo;ll get to that later. It&amp;rsquo;s currently performance review season where I work and many other medium-to-large organisations. I&amp;rsquo;ve heard a mixture of fear, uncertainty and doubt recently when it comes to performance reviews so I thought I&amp;rsquo;d write down some thoughts on how I feel about them.
-If you&amp;rsquo;re not familiar with the term, performance reviews are commonly an annual process.</description>
+      <description>&lt;p&gt;This blog post is for my current and future colleagues, but I&amp;rsquo;ll get&#xA;to that later. It&amp;rsquo;s currently performance review season where I work&#xA;and many other medium-to-large organisations. I&amp;rsquo;ve heard a mixture of&#xA;fear, uncertainty and doubt recently when it comes to performance&#xA;reviews so I thought I&amp;rsquo;d write down some thoughts on how I feel about&#xA;them.&lt;/p&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re not familiar with the term, performance reviews are commonly&#xA;an annual process. It&amp;rsquo;s where you, as an employee, are measured&#xA;against a set of predefined objectives. For each of these objectives&#xA;it describes: what you did, how you did it, and what you need to do&#xA;next. However it&amp;rsquo;s rare for that last point to be covered.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>What will happen in the next year?</title>
       <link>https://www.violentlymild.com/posts/what-will-happen-in-the-next-year/</link>
       <pubDate>Mon, 30 Mar 2015 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/what-will-happen-in-the-next-year/</guid>
-      <description>I recently attended Scale Summit. It’s an unconference that’s been running on and off for a few years. Every year there’s a regular session of “What’s changed since the last Scale Summit?”. At this session we go through any notes we have from previous years and discuss what’s changed. Finally, the session ends with those in attendance suggesting what they believe will happen in the coming year.
-Sessions at Scale Summit last forty-five minutes.</description>
+      <description>&lt;p&gt;I recently attended &lt;a href=&#34;http://www.scalesummit.org/&#34;&gt;Scale Summit&lt;/a&gt;. It’s&#xA;an &lt;a href=&#34;https://en.wikipedia.org/wiki/Unconference&#34;&gt;unconference&lt;/a&gt; that’s&#xA;been running on and off for a few years. Every year there’s a regular&#xA;session of &lt;em&gt;“What’s changed since the last Scale Summit?”&lt;/em&gt;. At this&#xA;session we go through any notes we have from&#xA;&lt;a href=&#34;https://gist.github.com/philandstuff/9684513#session-4-whats-changed-since-last-scale-camp&#34;&gt;previous years&lt;/a&gt;&#xA;and discuss&#xA;&lt;a href=&#34;https://gist.github.com/SteveMarshall/1f2d733f2cb8dda330bc&#34;&gt;what’s changed&lt;/a&gt;. Finally,&#xA;the session ends with those in attendance suggesting what they believe&#xA;will happen in the coming year.&lt;/p&gt;&#xA;&lt;p&gt;Sessions at Scale Summit last forty-five minutes. In the end, we&#xA;didn’t have time to discuss what we believe will happen in the next&#xA;year and quickly joined the end of the day festivities.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Solving problems with dependency management in Go</title>
       <link>https://www.violentlymild.com/posts/solving-problems-with-dependency-management-in-go/</link>
       <pubDate>Tue, 24 Feb 2015 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/solving-problems-with-dependency-management-in-go/</guid>
-      <description>This is a blog post I wrote for the GDS Technology blog. You can read the original here.
-In a previous blog post we talked about how we use the programming language Go. But it only briefly touched on the issue of dependency management, where Go is reliant on backwards compatible or vendored software. This post is about what we’ve done about that.
-Libraries As developers we regularly use other libraries or packages to help us solve a problem rather than writing everything ourselves.</description>
+      <description>&lt;p&gt;&lt;em&gt;This is a blog post I wrote for the GDS Technology blog. You can read&#xA;the original&#xA;&lt;a href=&#34;https://gdstechnology.blog.gov.uk/2015/02/24/solving-problems-with-dependency-management-in-go/&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;In a&#xA;&lt;a href=&#34;https://gdstechnology.blog.gov.uk/2014/11/14/using-go-in-government/&#34;&gt;previous blog post&lt;/a&gt;&#xA;we talked about how we use the programming language Go. But it only&#xA;briefly touched on the issue of&#xA;&lt;a href=&#34;https://www.gov.uk/service-manual/making-software/dependency-management&#34;&gt;dependency management&lt;/a&gt;,&#xA;where Go is reliant on backwards compatible or vendored software. This&#xA;post is about what we’ve done about that.&lt;/p&gt;&#xA;&lt;h3 id=&#34;libraries&#34;&gt;Libraries&lt;/h3&gt;&#xA;&lt;p&gt;As developers we regularly use other libraries or packages to help us&#xA;solve a problem rather than writing everything ourselves. Most&#xA;programming languages offer a dependency system for distributing&#xA;libraries. At GDS we use languages like Ruby, Python and Java and each&#xA;language has its preferred tool to manage these dependencies: bundler,&#xA;pip and gradle, for example.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Running a game day for GOV.UK</title>
       <link>https://www.violentlymild.com/posts/running-a-game-day-for-gov-uk/</link>
       <pubDate>Fri, 06 Feb 2015 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/running-a-game-day-for-gov-uk/</guid>
-      <description>This is a blog post I wrote for the GDS Technology blog. You can read the original here.
-For much of January, GOV.UK had a firebreak. It’s where teams are given some time to investigate new ideas and clean up technical debt. As part of this we ran a game day. In this blog post I’m going to explain what game days are, what we did and what we learnt.</description>
+      <description>&lt;p&gt;&lt;em&gt;This is a blog post I wrote for the GDS Technology blog. You can read&#xA;the original&#xA;&lt;a href=&#34;https://gdstechnology.blog.gov.uk/2015/02/06/running-a-game-day-for-gov-uk/&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;For much of January, GOV.UK had a firebreak. It’s where teams are&#xA;given some time to investigate new ideas and clean up technical&#xA;debt. As part of this we ran a game day. In this blog post I’m going&#xA;to explain what game days are, what we did and what we learnt.&lt;/p&gt;&#xA;&lt;h3 id=&#34;what-is-a-game-day&#34;&gt;What is a game day?&lt;/h3&gt;&#xA;&lt;p&gt;The reality is that we can’t prevent the unexpected. However, there&#xA;are some ways that we can prepare ourselves for it. We shouldn’t treat&#xA;these unexpected events as outside the bounds of what we’re able to&#xA;test. Instead, we should try to use them as a way to provide more&#xA;feedback and help us become more resilient. The advantage of this is&#xA;that it doesn’t rely on a big disaster to occur before we can learn&#xA;how to improve our systems. The added benefit is that the scope can be&#xA;defined by the team. This is where game days come in.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Using Go in government</title>
       <link>https://www.violentlymild.com/posts/using-go-in-government/</link>
       <pubDate>Fri, 14 Nov 2014 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/using-go-in-government/</guid>
-      <description>This is cross posted from the 5th birthday celebration series on the GopherAcademy blog and the GDS Technology blog. It was co-authored with Dan Carley.
-When the UK Government Digital Service started working on GOV.UK, much of it was built in Ruby. Since then, we’ve used a number of different programming languages across government including Java, Clojure, Scala, Python and Javascript. More recently, we’ve turned to Go for some projects.</description>
+      <description>&lt;p&gt;&lt;em&gt;This is cross posted from the&#xA;&lt;a href=&#34;http://blog.gopheracademy.com/birthday-bash-2014/go-turns-5/&#34;&gt;5th birthday celebration series&lt;/a&gt;&#xA;on the&#xA;&lt;a href=&#34;http://blog.gopheracademy.com/birthday-bash-2014/using-go-in-government/&#34;&gt;GopherAcademy blog&lt;/a&gt;&#xA;and the GDS Technology blog. It was co-authored with&#xA;&lt;a href=&#34;https://twitter.com/dancarley&#34;&gt;Dan Carley&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;When the UK &lt;a href=&#34;https://gds.blog.gov.uk/&#34;&gt;Government Digital Service&lt;/a&gt;&#xA;started working on &lt;a href=&#34;https://www.gov.uk/&#34;&gt;GOV.UK&lt;/a&gt;, much of it was&#xA;&lt;a href=&#34;https://gds.blog.gov.uk/govuk-launch-colophon/&#34;&gt;built in Ruby&lt;/a&gt;. Since&#xA;then, we’ve used a number of different programming languages across&#xA;government including Java, Clojure, Scala, Python and Javascript. More&#xA;recently, we’ve turned to Go for some projects.&lt;/p&gt;&#xA;&lt;p&gt;This is a brief experience report. It’s about how we’ve used Go and&#xA;what we feel would be useful to know for others considering it. If&#xA;you’re more interested in reading a case study delving into the&#xA;details of what we’ve done with Go, we’ve posted on our blog about our&#xA;&lt;a href=&#34;https://gdstechnology.blog.gov.uk/2013/12/05/building-a-new-router-for-gov-uk/&#34;&gt;router&lt;/a&gt;,&#xA;&lt;a href=&#34;https://gdstechnology.blog.gov.uk/2014/08/27/taking-another-look-at-gov-uks-disaster-recovery/&#34;&gt;crawler&lt;/a&gt;,&#xA;and&#xA;&lt;a href=&#34;https://gdstechnology.blog.gov.uk/2014/10/01/cdn-acceptance-testing/&#34;&gt;CDN acceptance test&lt;/a&gt;&#xA;projects.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Taking another look at GOV.UK’s disaster recovery</title>
       <link>https://www.violentlymild.com/posts/taking-another-look-at-gov-uks-disaster-recovery/</link>
       <pubDate>Wed, 27 Aug 2014 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/taking-another-look-at-gov-uks-disaster-recovery/</guid>
-      <description>This is a blog post I wrote for the GDS Technology blog. You can read the original here.
-As GOV.UK gets bigger, we often need to revisit the ways that we originally solved some problems. One thing that’s changed recently is how we prepare for disaster recovery.
-Disaster Recovery The reality of working in technology is that software systems fail, more often than we’d like and usually in ways that are beyond our control.</description>
+      <description>&lt;p&gt;&lt;em&gt;This is a blog post I wrote for the GDS Technology blog. You can read&#xA;the original&#xA;&lt;a href=&#34;https://gdstechnology.blog.gov.uk/2014/08/27/taking-another-look-at-gov-uks-disaster-recovery/&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;As GOV.UK gets bigger, we often need to revisit the ways that we&#xA;originally solved some problems. One thing that’s changed recently is&#xA;how we prepare for disaster recovery.&lt;/p&gt;&#xA;&lt;h3 id=&#34;disaster-recovery&#34;&gt;Disaster Recovery&lt;/h3&gt;&#xA;&lt;p&gt;The reality of working in technology is that software systems fail,&#xA;more often than we’d like and usually in ways that are beyond our&#xA;control. The process of thinking up high-level failure scenarios and&#xA;solutions for them is called&#xA;&lt;a href=&#34;http://en.wikipedia.org/wiki/Disaster_recovery&#34;&gt;disaster recovery&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Just a few more tweaks</title>
       <link>https://www.violentlymild.com/posts/just-a-few-more-tweaks/</link>
       <pubDate>Fri, 12 Feb 2010 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/just-a-few-more-tweaks/</guid>
-      <description>Whether you’re a designer or developer, tweaks can become the bane of your existence or the fastest way to ship that feature. When you’re working to a deadline or budget it’s not always possible to be as thorough as you’d like, so when should you be doing those tweaks?
-Solving usability problems In a previous post I explained why you should do usability testing. Something that I neglected to explain is that doing usability testing shouldn’t trigger mass rewrites of code or entire redesigns of functionality.</description>
+      <description>&lt;p&gt;Whether you’re a designer or developer, tweaks can become the bane of&#xA;your existence or the fastest way to ship that feature. When you’re&#xA;working to a deadline or budget it’s not always possible to be as&#xA;thorough as you’d like, so when should you be doing those tweaks?&lt;/p&gt;&#xA;&lt;h3 id=&#34;solving-usability-problems&#34;&gt;Solving usability problems&lt;/h3&gt;&#xA;&lt;p&gt;In a previous post I explained&#xA;&lt;a href=&#34;https://www.violentlymild.com/posts/why-you-should-do-usability-testing/&#34;&gt;why you should do usability testing&lt;/a&gt;. Something&#xA;that I neglected to explain is that doing usability testing shouldn’t&#xA;trigger mass rewrites of code or entire redesigns of&#xA;functionality. Once you’ve got your results and have them prioritised&#xA;you should: fix the biggest problems, with the least effort, that can&#xA;be solved for most people. After these issues have been fixed, try&#xA;testing the system once more and you’ll be able to gain better&#xA;feedback on what you might be missing.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Can you teach me how to make computer games?</title>
       <link>https://www.violentlymild.com/posts/can-you-teach-me-how-to-make-computer-games/</link>
       <pubDate>Thu, 04 Feb 2010 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/can-you-teach-me-how-to-make-computer-games/</guid>
-      <description>I was asked recently by a friend to teach his son — we’ll call him Marcus — how to program. Like many children (and many to follow) Marcus just wanted to make games. In this instance, I thought of Python and the PyGame library for it’s breadth and quality of documentation. Sadly, I still needed to teach him the basics of programming and Python isn’t as forgiving to beginners as I’d like.</description>
+      <description>&lt;p&gt;I was asked recently by a friend to teach his son — we’ll call him&#xA;Marcus — how to program. Like many children (and many to follow)&#xA;Marcus &lt;em&gt;just wanted to make games&lt;/em&gt;. In this instance, I thought of&#xA;Python and the &lt;a href=&#34;http://www.pygame.org/&#34;&gt;PyGame&lt;/a&gt; library for it’s&#xA;breadth and quality of documentation. Sadly, I still needed to teach&#xA;him the basics of programming and Python isn’t as forgiving to&#xA;beginners as I’d like.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Why you should do usability testing</title>
       <link>https://www.violentlymild.com/posts/why-you-should-do-usability-testing/</link>
       <pubDate>Thu, 28 Jan 2010 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/why-you-should-do-usability-testing/</guid>
-      <description>I recently completed my first usability test and while it wasn’t very rigorous, it definitely opened up my eyes to how much feedback can be gained in such a short period of time. This became even more evident when showing results to the clients (designer team) who were over-confident in their ability to produce easy to use products.
-I feel the process of usability testing can be summed up in these five steps:</description>
+      <description>&lt;p&gt;I recently completed my first usability test and while it wasn’t very&#xA;rigorous, it definitely opened up my eyes to how much feedback can be&#xA;gained in such a short period of time. This became even more evident&#xA;when showing results to the clients (designer team) who were&#xA;over-confident in their ability to produce easy to use products.&lt;/p&gt;&#xA;&lt;p&gt;I feel the process of usability testing can be summed up in these five steps:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Working to constraints</title>
       <link>https://www.violentlymild.com/posts/working-to-constraints/</link>
       <pubDate>Fri, 22 Jan 2010 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/working-to-constraints/</guid>
-      <description>I’ve been reading the 37signals SVN blog for a while now, but a recent talk by DHH really got me thinking. In it he speaks to a group of Stanford students and explains why they need to Unlearn their MBA. In this post I take some of the topics that he discusses and throw in my own opinion.
-As a side note: It’s interesting to consider how many people’s professional lives have been shaped by the software framework that DHH released to the world.</description>
+      <description>&lt;p&gt;I’ve been reading the 37signals &lt;a href=&#34;http://37signals.com/svn/&#34;&gt;SVN blog&lt;/a&gt;&#xA;for a while now, but a&#xA;&lt;a href=&#34;http://ecorner.stanford.edu/authorMaterialInfo.html?mid=2334&#34;&gt;recent talk&lt;/a&gt;&#xA;by &lt;!-- raw HTML omitted --&gt;DHH&lt;!-- raw HTML omitted --&gt; really got me&#xA;thinking. In it he speaks to a group of Stanford students and explains&#xA;why they need to &lt;em&gt;Unlearn their MBA&lt;/em&gt;. In this post I take some of the&#xA;topics that he discusses and throw in my own opinion.&lt;/p&gt;&#xA;&lt;p&gt;As a side note: It’s interesting to consider how many people’s&#xA;professional lives have been shaped by the software framework that DHH&#xA;released to the world. While many argue that 37signals needs to be&#xA;more open about their business figures and research methods, it’s&#xA;impossible to negate how they’ve created jobs (growing the industry?)&#xA;without ever dilluting their revenue.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Removable storage is just for the spec sheets</title>
       <link>https://www.violentlymild.com/posts/removable-storage-is-just-for-the-spec-sheets/</link>
       <pubDate>Tue, 12 Jan 2010 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/removable-storage-is-just-for-the-spec-sheets/</guid>
-      <description>Google released their official phone early last week: the Nexus One. Putting aside the fact that they’ve completely shafted all of their technology partners, I’d like to discuss how spec sheets are ruining the user experience of mobile devices. Many users (myself included) may plead the case for expandable storarge, but there is strong resistance when users are forced to manage their own files. Bad UI of file browsers and locks preventing data from being moved make using removable storage on phones a drain.</description>
+      <description>&lt;p&gt;Google released their &lt;em&gt;official phone&lt;/em&gt; early last week: the&#xA;&lt;a href=&#34;http://www.google.com/phone&#34;&gt;Nexus One&lt;/a&gt;. Putting aside the fact that&#xA;they’ve completely&#xA;&lt;a href=&#34;http://www.theregister.co.uk/2010/01/08/google_nexus_partner_friendly/&#34;&gt;shafted&lt;/a&gt;&#xA;all of their technology partners, I’d like to discuss how spec sheets&#xA;are ruining the user experience of mobile devices. Many users (myself&#xA;included) may plead the case for expandable storarge, but there is&#xA;strong resistance when users are forced to manage their own files. Bad&#xA;UI of file browsers and locks preventing data from being moved make&#xA;using removable storage on phones a drain.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Designing an interface to create interfaces</title>
       <link>https://www.violentlymild.com/posts/designing-an-interface-to-create-interfaces/</link>
       <pubDate>Sat, 02 Jan 2010 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/posts/designing-an-interface-to-create-interfaces/</guid>
-      <description>I’ve been reading Coders at Work recently and this blog post is spawned from a point made by Simon Peyton Jones in the book — Page 252, Paragraph 3 — about creating usable programming languages.
-When the field of HCI was established in the early 1980s, learnability was the research focus. By the late 1980s we had a handle on how to design for the novice user, demonstrating that even the best commercially available personal computer was much harder to learn than claimed by it’s manufacturer.</description>
+      <description>&lt;p&gt;&lt;em&gt;I’ve been reading&lt;/em&gt; &lt;a href=&#34;http://www.codersatwork.com/&#34;&gt;&lt;em&gt;Coders at Work&lt;/em&gt;&lt;/a&gt;&#xA;&lt;em&gt;recently and this blog post is spawned from a point made by&lt;/em&gt;&#xA;&lt;a href=&#34;http://research.microsoft.com/en-us/people/simonpj/&#34;&gt;&lt;em&gt;Simon Peyton Jones&lt;/em&gt;&lt;/a&gt;&#xA;&lt;em&gt;in the book — Page 252, Paragraph 3 — about creating usable&#xA;programming languages.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;When the field of &lt;!-- raw HTML omitted --&gt;HCI&lt;!-- raw HTML omitted --&gt;&#xA;was established in the early 1980s, learnability was the research&#xA;focus. By the late 1980s we had a handle on how to design for the&#xA;novice user, demonstrating that even the best commercially available&#xA;personal computer was much harder to learn than claimed by it’s&#xA;manufacturer.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Talks</title>
       <link>https://www.violentlymild.com/talks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://www.violentlymild.com/talks/</guid>
-      <description>This is a list of the talks that I’ve given or am going to give.
-2013 DevOpsDays Paris – How we release software for GOV.UK 2015 London Go User Group – Getting Go into your organisation London DevOps – An alternative history of DevOps CodeMesh 2015 – An introduction to Schedulers </description>
+      <description>&lt;p&gt;This is a list of the talks that I’ve given or am going to give.&lt;/p&gt;&#xA;&lt;h3 id=&#34;2013&#34;&gt;2013&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.devopsdays.org/events/2013-paris/&#34;&gt;DevOpsDays Paris – How we release software for GOV.UK&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2015&#34;&gt;2015&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.meetup.com/Go-London-User-Group/events/221550269/&#34;&gt;London Go User Group – Getting Go into your organisation&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.meetup.com/London-DevOps/events/221534372/&#34;&gt;London DevOps – An alternative history of DevOps&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.codemesh.io/codemesh2015/kushal-pisavadia&#34;&gt;CodeMesh 2015 – An introduction to Schedulers&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600&display=swap">
 
   <link rel="canonical" href="https://www.violentlymild.com/posts/reverse-engineering-linear-congruential-generators/">
-  <link href="https://www.violentlymild.com/index.xml" rel="alternate" type="application/rss+xml" title="Violently Mild">
+  <link href="" rel="alternate" type="application/rss+xml" title="Violently Mild">
 
   <link rel="home" href="/" title="Home page">
 </head>
@@ -46,9 +46,9 @@ number, so many developers over the years have opted to use a
 generator</a>
 (PRNG) instead.</p>
 <p>An example of this is Java&rsquo;s java.util.Random:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Random random <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Random<span style="color:#000;font-weight:bold">();</span>
-</span></span><span style="display:flex;"><span>System<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">out</span><span style="color:#000;font-weight:bold">.</span><span style="color:#008080">println</span><span style="color:#000;font-weight:bold">(</span>random<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">nextInt</span><span style="color:#000;font-weight:bold">());</span>
-</span></span></code></pre></div><p>One of the most widely used PRNGs is a <a href="https://en.wikipedia.org/wiki/Linear_congruential_generator">linear congruential
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Random<span style="color:#bbb"> </span>random<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">new</span><span style="color:#bbb"> </span>Random();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>System.<span style="color:#008080">out</span>.<span style="color:#008080">println</span>(random.<span style="color:#008080">nextInt</span>());<span style="color:#bbb">
+</span></span></span></code></pre></div><p>One of the most widely used PRNGs is a <a href="https://en.wikipedia.org/wiki/Linear_congruential_generator">linear congruential
 generator</a>. Due
 to their <em>linear</em> nature however if you observe enough of numbers
 generated you can work out how the numbers are produced.</p>
@@ -318,7 +318,7 @@ combinations of the three points:</p>
     </main>
 
     <footer>
-      <p>&copy; 2008-2023 Kushal Pisavadia</p>
+      <p>&copy; 2008-2024 Kushal Pisavadia</p>
     </footer>
   </body>
 </html>
